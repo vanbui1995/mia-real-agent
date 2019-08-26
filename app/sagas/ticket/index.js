@@ -173,8 +173,8 @@ function* updateTicket({ payload }) {
 }
 
 function* closeTicket({ payload }) {
-  const { ticketId } = payload;
-  const { response, error } = yield call(TicketApi.closeTicket, ticketId);
+  const { ticketId, status, unsolvedReason } = payload;
+  const { response, error } = yield call(TicketApi.closeTicket, ticketId, status, unsolvedReason);
   if (error) {
     const message = _get(
       error, 'response.data.message', error.message

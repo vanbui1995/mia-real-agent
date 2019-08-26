@@ -7,13 +7,14 @@ import UserService from '../user/user.service';
 import ConversationService from '../conversation/conversation.service';
 import APIError, { ERROR_MESSAGE } from '../../utils/APIError';
 import { isAgent } from '../../../app/utils/func-utils';
-import { TICKET_STATUS, REPLY_TYPE, REPLY_USER_ACTION } from '../../../common/enums';
+import {
+  TICKET_STATUS, REPLY_TYPE, REPLY_USER_ACTION, CLOSED_TICKET_STATUSES,
+} from '../../../common/enums';
 import RequestQueue from '../queue/requestQueue';
-import ConversationRoomQueue from '../queue/conversationRoomQueue';
 import ReplyService from '../reply/reply.service';
 import { getHistoryTicketUpdate } from '../../utils/utils';
 
-const { CONTENT_NOT_FOUND } = ERROR_MESSAGE;
+const { CONTENT_NOT_FOUND, BAD_REQUEST } = ERROR_MESSAGE;
 const emptyObjString = '{}';
 
 class TicketController extends BaseController {
@@ -207,17 +208,20 @@ class TicketController extends BaseController {
 
   async closeTicket(req, res) {
     try {
-      const { model: ticket } = req;
+      const { model: ticket, body: { status, unsolvedReason } } = req;
       if (!ticket) {
         throw new APIError(CONTENT_NOT_FOUND, httpStatus.NOT_FOUND);
       }
+      if (!CLOSED_TICKET_STATUSES.includes(status)
+        || (status === TICKET_STATUS.UNSOLVED && !unsolvedReason)) {
+        throw new APIError(BAD_REQUEST, httpStatus.BAD_REQUEST);
+      }
       const { history, conversationId } = ticket;
       const oldHistory = history.map(h => h.toJSON());
-      const newHistory = getHistoryTicketUpdate(oldHistory, TICKET_STATUS.CLOSED);
-      _.assign(ticket, { status: TICKET_STATUS.CLOSED, history: newHistory });
+      const newHistory = getHistoryTicketUpdate(oldHistory, status);
+      _.assign(ticket, { status, history: newHistory, unsolvedReason: (unsolvedReason || '') });
       // const { conversationId, _id } = ticket;
       // ConversationRoomQueue.ticketClosedNotification(conversationId, _id);
-
 
       const result = await ticket.save({});
       // We should send transcript after 1 second for without missing any message

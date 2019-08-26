@@ -15,7 +15,8 @@ const ticketSchema = new Schema(
     status: {
       type: String,
       enum: [
-        TICKET_STATUS.CLOSED,
+        TICKET_STATUS.SOLVED,
+        TICKET_STATUS.UNSOLVED,
         TICKET_STATUS.OPEN,
         TICKET_STATUS.IDLE,
         TICKET_STATUS.PROCESSING,
@@ -38,7 +39,8 @@ const ticketSchema = new Schema(
         type: String,
         required: false,
         enum: [
-          TICKET_STATUS.CLOSED,
+          TICKET_STATUS.SOLVED,
+          TICKET_STATUS.UNSOLVED,
           TICKET_STATUS.OPEN,
           TICKET_STATUS.IDLE,
           TICKET_STATUS.PROCESSING,
@@ -51,7 +53,8 @@ const ticketSchema = new Schema(
         type: String,
         required: false,
         enum: [
-          TICKET_STATUS.CLOSED,
+          TICKET_STATUS.SOLVED,
+          TICKET_STATUS.UNSOLVED,
           TICKET_STATUS.OPEN,
           TICKET_STATUS.IDLE,
           TICKET_STATUS.PROCESSING,
@@ -61,6 +64,10 @@ const ticketSchema = new Schema(
         ],
       },
     }],
+    unsolvedReason: {
+      type: String,
+      required: false,
+    },
     category: [String],
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
     assignee: { type: Schema.Types.ObjectId, ref: 'User' },

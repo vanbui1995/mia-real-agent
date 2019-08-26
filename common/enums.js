@@ -28,12 +28,18 @@ export const ROLES = {
 
 export const TICKET_STATUS = {
   OPEN: 'Open',
-  CLOSED: 'Closed',
+  SOLVED: 'Solved',
+  UNSOLVED: 'Unsolved',
   PENDING: 'Pending',
   IDLE: 'Idle',
   PROCESSING: 'Processing',
   OFFLINE: 'Offline',
 };
+
+export const CLOSED_TICKET_STATUSES = [
+  TICKET_STATUS.SOLVED,
+  TICKET_STATUS.UNSOLVED,
+];
 
 export const COLOR_BY_ACTION = {
   'Accept Request': '#449bea',
@@ -44,7 +50,8 @@ export const COLOR_BY_ACTION = {
 
 export const COLOR_BY_STATUS = {
   Open: '#449bea',
-  Closed: '#d4101e',
+  Solved: '#d4101e',
+  Unsolved: '#d4101e',
   Pending: '#e5cc94',
   Processing: '#05ca05',
   Idle: '#f7d00f',

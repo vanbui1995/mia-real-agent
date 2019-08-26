@@ -37,8 +37,12 @@ function getHourMinutes(durationInSecondInMinutes) {
 
 
 class TimerWrapper extends React.PureComponent {
-  propTypes = {
-    history: arrayOf(shape()).isRequired,
+  static propTypes = {
+    history: arrayOf(shape()),
+  }
+
+  static defaultProps = {
+    history: [],
   }
 
   state = {}

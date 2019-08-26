@@ -135,8 +135,8 @@ class TicketService extends BaseService {
   }
 
   async handleCloseTicket(query) {
-    await this.handleUpdateTicketStatusHistory(query, TICKET_STATUS.CLOSED);
-    const tickets = await this.collection.updateMany(query, { status: TICKET_STATUS.CLOSED }).exec();
+    await this.handleUpdateTicketStatusHistory(query, TICKET_STATUS.SOLVED);
+    const tickets = await this.collection.updateMany(query, { status: TICKET_STATUS.SOLVED }).exec();
     return tickets;
   }
 

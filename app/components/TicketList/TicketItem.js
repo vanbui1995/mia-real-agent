@@ -34,7 +34,8 @@ class TicketItem extends React.PureComponent {
     const { ticket } = this.props;
     const { status } = ticket;
     switch (status) {
-      case TICKET_STATUS.CLOSED:
+      case TICKET_STATUS.SOLVED:
+      case TICKET_STATUS.UNSOLVED:
         return (
           <ActionList>
             <Button>Archive</Button>
@@ -80,7 +81,6 @@ class TicketItem extends React.PureComponent {
               <Icon type="setting" onClick={this.handleStopPropagation} />
             </Popover>
           </TicketAction>
-
         </TicketGroup>
         <TimeCreateTicket>{timeFormat}</TimeCreateTicket>
       </TicketItemStyled>

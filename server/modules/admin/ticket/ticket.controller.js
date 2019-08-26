@@ -4,7 +4,7 @@ import _get from 'lodash/get';
 
 import BaseController from '../../base/base.controller';
 import TicketService from '../../ticket/ticket.service';
-import { TICKET_STATUS } from '../../../../common/enums';
+import { TICKET_STATUS, CLOSED_TICKET_STATUSES } from '../../../../common/enums';
 
 const emptyObjString = '{}';
 
@@ -55,7 +55,7 @@ class AdminTicketController extends BaseController {
       const resolved = await this.service.getTicketCount({ ...queryCondition, status: TICKET_STATUS.RESOLVED });
       const pending = await this.service.getTicketCount({ ...queryCondition, status: TICKET_STATUS.IDLE });
       const processing = await this.service.getTicketCount({ ...queryCondition, status: TICKET_STATUS.PROCESSING });
-      const closed = await this.service.getTicketCount({ ...queryCondition, status: TICKET_STATUS.CLOSED });
+      const closed = await this.service.getTicketCount({ ...queryCondition, status: { $in: CLOSED_TICKET_STATUSES } });
       return res.status(httpStatus.OK).send({
         resolved, pending, processing, closed,
       });

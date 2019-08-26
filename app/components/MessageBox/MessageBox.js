@@ -28,7 +28,7 @@ import {
 } from './styles';
 import LoadingSpin from '../Loading';
 import ConversationDetail from '../ConversationDetail/ConversationDetail';
-import { TICKET_STATUS, REPLY_TYPE } from '../../../common/enums';
+import { TICKET_STATUS, REPLY_TYPE, CLOSED_TICKET_STATUSES } from '../../../common/enums';
 import FormInput from '../FormInput/FormInput';
 import { combineChat } from './utils';
 import { shouldShowSystemMessage, isAgent, toI18n } from '../../utils/func-utils';
@@ -331,7 +331,7 @@ export default class MessageBox extends Component {
         {this.renderMessageHeader()}
         <MessageBoxWrapper>
           <MessageBoxContent>
-            {/* {status === TICKET_STATUS.CLOSED ? this.renderRating()
+            {/* {status === TICKET_STATUS.SOLVED ? this.renderRating()
               : ( */}
             <>
               <ShadowScrollbars
@@ -347,7 +347,7 @@ export default class MessageBox extends Component {
                 {this.renderPendingMessageContent()}
                 <div ref={this.messagesEndRef} />
               </ShadowScrollbars>
-              {status === TICKET_STATUS.CLOSED ? (
+              {CLOSED_TICKET_STATUSES.includes(status) ? (
                 <MessageBoxSystemNotification>
                   {toI18n('CONV_MESSAGE_BOX_TICKET_CLOSED')}
                 </MessageBoxSystemNotification>

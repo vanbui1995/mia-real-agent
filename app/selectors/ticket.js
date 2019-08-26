@@ -8,6 +8,8 @@ import { getRouteMatch } from './router';
 const emptyMap = fromJS({});
 const emptyList = fromJS([]);
 
+const getTicketIsClosing = ({ ticket }) => ticket.get('isClosing');
+const getTicketCloseError = ({ ticket }) => ticket.get('closeError');
 const getTicketIsCreating = ({ ticket }) => ticket.get('isCreating');
 const getTicketCreateError = ({ ticket }) => ticket.get('createError');
 const getTicketIsUpdating = ({ ticket }) => ticket.get('isUpdating');
@@ -77,6 +79,7 @@ export {
   reselectSorting,
   getSelectedPage,
   getSizePerPage,
+  getTicketIsClosing,
   getTicketIsCreating,
   getTicketCreateError,
   getTicketIsUpdating,
@@ -92,6 +95,7 @@ export {
   getIsFetching,
   getFetchingError,
   getTicketIdList,
+  getTicketCloseError,
 
   reselectTickets,
   getTicketIdFromRoute,

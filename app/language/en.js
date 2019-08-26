@@ -6,6 +6,8 @@ const en = {
     USER: 'User',
     AGENT: 'Agent',
     MENU: 'Menu',
+    CLOSE: 'Close',
+    CANCEL: 'Cancel',
     // Form
     FORM_BACK: 'Back',
     FORM_NEXT: 'Next',
@@ -291,6 +293,10 @@ const en = {
     PROFILE_BUSINESS_FORM_WORKING_FIELDS: 'Working fields',
     PROFILE_BUSINESS_FORM_ADDRESS: 'Address',
     PROFILE_BUSINESS_FORM_PHONE: 'Phone No.',
+    // Close Ticket Modal
+    CLOSE_TICKET_MODAL_CLOSED_STATUS: 'Closed Status',
+    CLOSE_TICKET_MODAL_UNSOLVED_REASON: 'Unsolved Reason',
+    CLOSE_TICKET_MODAL_CLOSE_TICKET: 'Close Ticket',
   },
 };
 

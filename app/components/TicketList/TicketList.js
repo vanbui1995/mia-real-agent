@@ -6,7 +6,7 @@ import ShadowScrollbars from 'components/Scrollbar';
 import MediaQuery from 'react-responsive';
 import history from 'utils/history';
 import {
-  Menu, Select, Pagination, Icon, TreeSelect
+  Menu, Select, Pagination, Icon, TreeSelect,
 } from 'antd';
 import TicketItem from './TicketItem';
 import {
@@ -15,6 +15,7 @@ import {
   TicketPaginationWrapper,
   FilterContainer,
 } from './TicketList.styled';
+import CloseTicketModal from './CloseTicketModal';
 
 const treeData = [
   {
@@ -60,6 +61,7 @@ class TicketList extends React.PureComponent {
   state = {
     page: 0,
     isHide: false,
+    closeTicketId: null,
   }
 
   componentDidMount = () => {
@@ -104,8 +106,18 @@ class TicketList extends React.PureComponent {
     }
   }
 
+  handleClickCloseTicket = (ticketId) => {
+    this.setState({ closeTicketId: ticketId });
+  }
+
+  handleCloseTicket = ({ status, unsolvedReason }) => {
+    const { closeAction } = this.props;
+    const { closeTicketId: ticketId } = this.state;
+    closeAction(ticketId, status, unsolvedReason);
+  }
+
   renderTicketItem = (ticket, index) => {
-    const { openSetting, userRole, closeAction } = this.props;
+    const { userRole } = this.props;
     const { _id: ticketId, conversationId } = ticket;
     return (
       <Menu.Item key={ticketId} onClick={() => this.handleSelectTicket(conversationId)}>
@@ -113,7 +125,7 @@ class TicketList extends React.PureComponent {
           number={index + 1}
           userRole={userRole}
           ticket={ticket}
-          onClose={closeAction}
+          onClose={this.handleClickCloseTicket}
         // onRemove={() => this.handleRemoveTicket(ticketId)}
         // onArchive={() => this.handleArchiveTicket(ticketId)}
         // openSetting={openSetting}
@@ -185,8 +197,15 @@ class TicketList extends React.PureComponent {
     );
   }
 
+  handleCloseModal = () => {
+    this.setState({
+      closeTicketId: null,
+    });
+  }
+
   render() {
     const { isFetchingList = {} } = this.props;
+    const { closeTicketId } = this.state;
     if (isFetchingList) {
       return <SpinnerLoading />;
     }
@@ -198,6 +217,11 @@ class TicketList extends React.PureComponent {
           {this.renderTicketFilter()}
         </FilterContainer>
         {this.renderTicketPagination()}
+        <CloseTicketModal
+          handleSubmitCloseTicket={this.handleCloseTicket}
+          handleCloseModal={this.handleCloseModal}
+          isOpen={Boolean(closeTicketId)}
+        />
       </TicketItemWrapper>
     );
   }

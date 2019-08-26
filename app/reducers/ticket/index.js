@@ -171,10 +171,12 @@ const updateFailAction = errorMessage => ({
   },
 });
 
-const closeAction = ticketId => ({
+const closeAction = (ticketId, status, unsolvedReason) => ({
   type: TICKET_CLOSE,
   payload: {
     ticketId,
+    status,
+    unsolvedReason,
   },
 });
 
