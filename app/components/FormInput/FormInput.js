@@ -21,6 +21,7 @@ export const INPUT_TYPES = {
   TEXT_AREA: 'textarea',
   SWITCH: 'switch',
   RATE: 'rate',
+  RICH_EDITOR: 'rich_editor',
 };
 
 const FORM_LAYOUT = {
@@ -535,7 +536,9 @@ class FormInput extends React.Component {
     shouldRenderFeedback,
     ...props
   }) => {
-    const { disabled, options, handleChange, inputSize, label: fieldLabel } = props; // required
+    const {
+      disabled, options, handleChange, inputSize, label: fieldLabel,
+    } = props; // required
 
     const onChange = (value) => {
       form.setFieldValue(field.name, value);
@@ -656,6 +659,11 @@ class FormInput extends React.Component {
         return this.renderSliderInput(props);
       case INPUT_TYPES.RATE:
         return this.renderRateInput(props);
+
+      case INPUT_TYPES.RICH_EDITOR:
+        return (
+          <DraftEditor {...props} />
+        );
       default:
         return this.renderTextInput(props);
     }

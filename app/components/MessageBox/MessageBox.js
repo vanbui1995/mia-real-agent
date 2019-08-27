@@ -36,6 +36,7 @@ import { ProfileImageStyled } from '../TopNavBar/TopNavBar.styled';
 import {
   userChat, otherChat, otherTyping, botChat, ticketStatus, userAction,
 } from './ChatItem';
+import RichEditor from '../FormInput/RichEditor/RichEditor';
 
 const scrollStyle = {
   height: 'calc(100% - 60px)',
@@ -237,16 +238,9 @@ export default class MessageBox extends Component {
         {({ handleSubmit }) => (
           <Form
             onSubmit={handleSubmit}
-            onChange={this.handleChangeValues}
           >
             <MessageInputWrapper>
-              <MessageInput
-                onChange={this.handleTyping}
-                type="text"
-                name="content"
-                placeholder={t('CONV_MESSAGE_BOX_TYPE_MESSAGE')}
-                autoComplete="off"
-              />
+              <RichEditor mentions={[]} />
               {this.renderGroupAction()}
               <InputAction onClick={handleSubmit} className="mia-enter" />
             </MessageInputWrapper>
