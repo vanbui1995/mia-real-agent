@@ -6,6 +6,7 @@ import moment from 'moment';
 import bcrypt from 'bcrypt';
 import { hashFunc } from '../../utils/bcrypt';
 import userCollection from './user.model';
+import TicketCollection from '../ticket/ticket.model';
 import BaseService from '../base/base.service';
 // import {
 //   sendUserVerifyMail,
@@ -103,6 +104,19 @@ class UserService extends BaseService {
   async getUserCount(query) {
     const result = await this.collection.find(query).count();
     return result;
+  }
+
+  async updateRating(agentId, rating, isSolved) {
+    const agent = await this.collection.findOne({ _id: agentId });
+    const { rating: currentRating = 0, solved, unsolved } = agent;
+    const NoRatedTicket = await TicketCollection.countDocuments({
+      assignee: agentId,
+      rating: { $exists: true },
+    });
+    const newRating = (NoRatedTicket * currentRating + rating) / (NoRatedTicket + 1);
+    _.assign(agent, { rating: newRating, solved: solved + isSolved, unsolved: unsolved + !isSolved });
+    const savedModel = await agent.save();
+    return savedModel;
   }
 }
 

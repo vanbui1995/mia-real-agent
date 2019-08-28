@@ -20,7 +20,7 @@ import {
   actions, TICKET_CREATE, TICKET_GET_ALL,
   TICKET_GET_DETAIL, TICKET_UPDATE, TICKET_ARCHIVE,
   TICKET_ADMIN_GET_ALL, TICKET_SORTING, TICKET_CHANGE_PAGE,
-  TICKET_FETCH_SINGLE, TICKET_SET_CURRENT, TICKET_CLOSE, GET_TIKCET_PROFILE,
+  TICKET_FETCH_SINGLE, TICKET_SET_CURRENT, TICKET_CLOSE, GET_TIKCET_PROFILE, TIKCET_RATING_SUBMIT,
 } from '../../reducers/ticket';
 import { actions as CONVERSATION_ACTIONS } from '../../reducers/conversations';
 import {
@@ -228,6 +228,22 @@ function* getTicketProfile({ payload }) {
   }
 }
 
+function* submitTicketRating({ payload }) {
+  const { conversationId, rating } = payload;
+  try {
+    const { response, error } = yield call(TicketApi.submitRating, conversationId, rating);
+    if (error) throw new Error(error);
+    const data = _get(response, 'data', {});
+    notification.success({ message: 'Rating submitted' });
+    console.log(data)
+    yield put(actions.submitTicketRatingSuccess(data));
+  } catch (error) {
+    const errorMessage = error.message || error;
+    notification.error({ message: errorMessage });
+    yield put(actions.submitTicketRatingFailed(errorMessage));
+  }
+}
+
 function* ticketFlow() {
   yield take(AUTH_LOGIN_SUCCESS);
   yield all([
@@ -242,6 +258,7 @@ function* ticketFlow() {
     takeLatest(TICKET_FETCH_SINGLE, ticketFetchSingle),
     takeLatest(TICKET_SET_CURRENT, setCurrentTicket),
     takeLatest(GET_TIKCET_PROFILE, getTicketProfile),
+    takeLatest(TIKCET_RATING_SUBMIT, submitTicketRating),
   ]);
 }
 

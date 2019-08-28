@@ -30,7 +30,7 @@ export const CheckMark = styled.span`
     left: 0;
     height: 20px;
     width: 20px;
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${props => props.theme.colorStyled.ColorWhite};
     border: 1px solid var(--zigvy-col-border);
     border-radius: 4px;
 `;
@@ -133,8 +133,11 @@ export const InputStyled = styled(Input)`
 `;
 
 export const InputWrapperStyled = styled(Form.Item)`
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
   margin-bottom: 10px!important;
+  .ant-form-explain{
+    margin-top: .5em;
+  }
   .ant-select-selection__choice__content{
     font-weight: 600;
   }
@@ -164,10 +167,10 @@ export const InputWrapperStyled = styled(Form.Item)`
       border: 1px solid #000 !important;
     }
     &:hover {
-      border-color: ${props => props.theme.textColor};
+      border-color: ${props => props.theme.colorStyled.ColorBlack};
     }
     .anticon-down {
-      color: ${props => props.theme.textColor};
+      color: ${props => props.theme.colorStyled.ColorBlack};
     }
   }
   .ant-select-open .ant-select-selection {

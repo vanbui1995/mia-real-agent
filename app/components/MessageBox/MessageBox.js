@@ -29,19 +29,19 @@ import {
 } from './styles';
 import LoadingSpin from '../Loading';
 import ConversationDetail from '../ConversationDetail/ConversationDetail';
-import { REPLY_TYPE, CLOSED_TICKET_STATUSES } from '../../../common/enums';
+import { REPLY_TYPE, CLOSED_TICKET_STATUSES, TICKET_STATUS } from '../../../common/enums';
 import FormInput from '../FormInput/FormInput';
 import { combineChat } from './utils';
 import { shouldShowSystemMessage, isAgent, toI18n } from '../../utils/func-utils';
 import { ProfileImageStyled } from '../TopNavBar/TopNavBar.styled';
 import {
-  userChat, otherChat, otherTyping, botChat, ticketStatus, userAction,
+  userChat, otherChat, otherTyping, botChat, ticketStatus, userAction, ticketRating,
 } from './ChatItem';
 import RichEditor from '../FormInput/RichEditor/RichEditor';
 import mentions from '../FormInput/RichEditor/mentions';
 
 const scrollStyle = {
-  height: 'calc(100% - 60px)',
+  flex: 'auto',
   width: '100%',
 };
 
@@ -182,6 +182,8 @@ export default class MessageBox extends Component {
           return userAction(msgId, currentTicket, from, params, sentAt);
         case REPLY_TYPE.BOT_RESPONSE:
           return botChat(msgId, contents);
+        case REPLY_TYPE.RATING_ACTION:
+          return ticketRating(msgId, currentTicket, params, sentAt);
         default:
           if (from === userId) {
             return userChat(msgId, contents, false, isAgent(userRole));
@@ -301,8 +303,8 @@ export default class MessageBox extends Component {
   }
 
   handleSubmitRating = (values) => {
-    const { submitRating, currentConversation } = this.props;
-    const { _id } = currentConversation;
+    const { submitRating, currentTicket } = this.props;
+    const { _id } = currentTicket;
     submitRating(_id, values);
   }
 
@@ -338,45 +340,68 @@ export default class MessageBox extends Component {
     );
   }
 
-  render() {
+  renderMessageBoxFooter = () => {
     const {
-      isFetchingReplies, isFindingAgent, otherUserTyping,
+      currentTicket, userRole,
+    } = this.props;
+    const { status, rating, assignee } = currentTicket || {};
+    if (CLOSED_TICKET_STATUSES.includes(status)) {
+      if (!isAgent(userRole) && !rating && assignee) {
+        return this.renderRating();
+      }
+      return (
+        <MessageBoxSystemNotification>
+          {toI18n('CONV_MESSAGE_BOX_TICKET_CLOSED')}
+        </MessageBoxSystemNotification>
+      );
+    }
+    return this.renderMessageInput();
+  }
+
+  renderMessageBoxContent = () => {
+    const {
+      otherUserTyping,
       replyMessages, currentTicket, systemMessage,
       conversationId, solutionFound, userRole,
     } = this.props;
-    const { status, assignee } = currentTicket || {};
     const hasChatData = !_isEmpty(replyMessages)
       || shouldShowSystemMessage(systemMessage, conversationId)
       || !_isEmpty(otherUserTyping);
+    const { assignee, status } = currentTicket || {};
+    return (
+      <>
+        <ShadowScrollbars
+          autoHide
+          style={scrollStyle}
+        >
+          {!hasChatData
+            ? <MessageEmpty>{toI18n('CONV_MESSAGE_BOX_NO_CHAT_DATA')}</MessageEmpty>
+            : this.renderMessageContent()
+          }
+          {solutionFound
+            && status === TICKET_STATUS.OPEN
+            && !isAgent(userRole)
+            && _isEmpty(assignee)
+            && this.renderFindAgentForSolution()}
+          {this.renderPendingMessageContent()}
+          <div ref={this.messagesEndRef} />
+        </ShadowScrollbars>
+        {this.renderMessageBoxFooter()}
+      </>
+    );
+  }
+
+
+  render() {
+    const {
+      isFetchingReplies, isFindingAgent, currentTicket,
+    } = this.props;
     return (
       <LoadingSpin loading={isFetchingReplies || isFindingAgent}>
         {this.renderMessageHeader()}
         <MessageBoxWrapper>
           <MessageBoxContent>
-            {/* {status === TICKET_STATUS.SOLVED ? this.renderRating()
-              : ( */}
-            <>
-              <ShadowScrollbars
-                autoHide
-                style={scrollStyle}
-              >
-                {!hasChatData
-                  ? <MessageEmpty>{toI18n('CONV_MESSAGE_BOX_NO_CHAT_DATA')}</MessageEmpty>
-                  : this.renderMessageContent()
-                }
-                {solutionFound && !isAgent(userRole) && _isEmpty(assignee)
-                  && this.renderFindAgentForSolution()}
-                {this.renderPendingMessageContent()}
-                <div ref={this.messagesEndRef} />
-              </ShadowScrollbars>
-              {CLOSED_TICKET_STATUSES.includes(status) ? (
-                <MessageBoxSystemNotification>
-                  {toI18n('CONV_MESSAGE_BOX_TICKET_CLOSED')}
-                </MessageBoxSystemNotification>
-              ) : this.renderMessageInput()
-              }
-            </>
-            {/* )} */}
+            {this.renderMessageBoxContent()}
           </MessageBoxContent>
           <ConversationDetail ticket={currentTicket} />
         </MessageBoxWrapper>

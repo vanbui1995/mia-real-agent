@@ -1,11 +1,11 @@
 import React from 'react';
 import moment from 'moment';
-import { Tooltip } from 'antd';
+import { Tooltip, Icon } from 'antd';
 import _isEmpty from 'lodash/isEmpty';
 import {
   MessageBoxItem, MessageText,
   UserMessage, ProfileImageStyled,
-  MessageBoxSystemNotification, LineDivider, MessageBoxItemIsTyping, IsTypingWrapper, TicketActionStatus, UserAction, TicketActionStatusTitle,
+  MessageBoxSystemNotification, LineDivider, MessageBoxItemIsTyping, IsTypingWrapper, TicketActionStatus, UserAction, TicketActionStatusTitle, TicketRatingScore, CommentWrapper,
 } from './styles';
 import { ROLES } from '../../../common/enums';
 import { toI18n } from '../../utils/func-utils';
@@ -122,6 +122,47 @@ export const userAction = (msgId, currentTicket, from, params, sentAt) => {
         {toI18n('CONV_MESSAGE_BOX_USER_IS')}
         {' '}
         <UserAction action={action}>{action}</UserAction>
+      </Tooltip>
+      <LineDivider />
+    </MessageBoxSystemNotification>
+  );
+};
+
+export const ticketRating = (msgId, currentTicket, params, sentAt) => {
+  const { score, comment } = params;
+  if (_isEmpty(currentTicket)) {
+    return null;
+  }
+  const { owner } = currentTicket;
+  const { role, profile = {} } = owner;
+  const { firstName, lastName, company = 'N/A' } = profile;
+  let messageOwner = '';
+  switch (role) {
+    case ROLES.INDIVIDUAL:
+      messageOwner = `${firstName} ${lastName}`;
+      break;
+    default:
+      messageOwner = company;
+      break;
+  }
+  return (
+    <MessageBoxSystemNotification key={`status${msgId}`}>
+      <LineDivider />
+      <Tooltip placement="top" title={renderTime(sentAt)}>
+        {
+          `${messageOwner} `
+        }
+        {toI18n('CONV_MESSAGE_BOX_TICKET_RATING')}
+        <TicketRatingScore>
+          {Array(...Array(Math.floor(score))).map(() => (
+            <Icon type="star" theme="filled" />
+          ))}
+        </TicketRatingScore>
+        {toI18n('CONV_MESSAGE_BOX_TICKET_RATING_COMMENT')}
+        {' '}
+        <CommentWrapper>
+          {comment}
+        </CommentWrapper>
       </Tooltip>
       <LineDivider />
     </MessageBoxSystemNotification>

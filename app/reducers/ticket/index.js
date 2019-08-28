@@ -41,6 +41,12 @@ export const TICKET_SET_CURRENT = 'ticket/TICKET_SET_CURRENT';
 export const GET_TIKCET_PROFILE = 'ticket/GET_TIKCET_PROFILE';
 export const GET_TIKCET_PROFILE_SUCCESS = 'ticket/GET_TIKCET_PROFILE_SUCCESS';
 export const GET_TIKCET_PROFILE_FAIL = 'ticket/GET_TIKCET_PROFILE_FAIL';
+
+
+export const TIKCET_RATING_SUBMIT = 'ticket/TIKCET_RATING_SUBMIT';
+export const TIKCET_RATING_SUBMIT_SUCCESS = 'ticket/TIKCET_RATING_SUBMIT_SUCCESS';
+export const TIKCET_RATING_SUBMIT_FAIL = 'ticket/TIKCET_RATING_SUBMIT_FAIL';
+
 // action creator
 
 const getTicketProfile = ticketId => ({
@@ -63,6 +69,31 @@ const getTicketProfileFail = errorMessage => ({
   type: GET_TIKCET_PROFILE_FAIL,
   payload: {
     errorMessage,
+  },
+});
+
+// SUBMIT TICKET RATING
+
+const submitTicketRating = (conversationId, { score, comment }) => ({
+  type: TIKCET_RATING_SUBMIT,
+  payload: {
+    conversationId,
+    rating: {
+      score,
+      comment,
+    },
+  },
+});
+
+const submitTicketRatingSuccess = ticket => ({
+  type: TIKCET_RATING_SUBMIT_SUCCESS,
+  payload: ticket,
+});
+
+const submitTicketRatingFailed = error => ({
+  type: TIKCET_RATING_SUBMIT_FAIL,
+  payload: {
+    error,
   },
 });
 
@@ -339,6 +370,14 @@ function ticketReducer(state = initialState, action) {
         .setIn(['tickets', _id], fromJS({ ...tmpTicket, ...payload }));
     }
 
+    case TIKCET_RATING_SUBMIT_SUCCESS: {
+      const { payload } = action;
+      const { _id } = payload;
+      const tmpTicket = state.get('tickets').get(_id).toJS();
+      return state.set('isUpdating', false)
+        .setIn(['tickets', _id], fromJS({ ...tmpTicket, ...payload }));
+    }
+
     case UPDATE_FAIL:
       return state.set('isUpdating', false)
         .set('updateError', action.payload.errorMessage);
@@ -458,4 +497,8 @@ export const actions = {
   getTicketProfile,
   getTicketProfileSuccess,
   getTicketProfileFail,
+
+  submitTicketRating,
+  submitTicketRatingSuccess,
+  submitTicketRatingFailed,
 };

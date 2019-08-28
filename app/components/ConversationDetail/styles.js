@@ -8,8 +8,8 @@ export const ChatbotWrapper = styled.div`
 
 export const ChatbotConversationListWrapper = styled.div`
   flex: 0 0 400px;
-  color: ${props => props.theme.textColor};
-  background-color: ${props => props.theme.secondaryColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   border-right: 1px solid #d9d9d9;
   transition: all 200ms ease;
   .ant-input-search {
@@ -33,9 +33,9 @@ export const ChatbotConversationListWrapper = styled.div`
   }
   .ant-menu-item {
     line-height: normal;
-    color: ${props => props.theme.textColor};
+    color: ${props => props.theme.colorStyled.ColorBlack};
     &:hover {
-      color: ${props => props.theme.textColor};
+      color: ${props => props.theme.colorStyled.ColorBlack};
       background-color: #f5f6f7 !important;
       border-bottom: 1px solid #d9d9d9;
       .anticon-setting {
@@ -55,7 +55,7 @@ export const ChatbotConversationListWrapper = styled.div`
     margin-right: 10px;
   }
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    color: ${props => props.theme.textColor};
+    color: ${props => props.theme.colorStyled.ColorBlack};
     background-color: #f5f6f7;
     border-bottom: 1px solid #d9d9d9;
   }
@@ -72,20 +72,20 @@ export const ChatbotConversationListWrapper = styled.div`
       flex: 1;
       text-align: center;
       margin: 0px;
-      color: ${props => props.theme.textColor};
+      color: ${props => props.theme.colorStyled.ColorBlack};
       opacity: 0.6;
       &:hover {
-        color: ${props => props.theme.textColor};
+        color: ${props => props.theme.colorStyled.ColorBlack};
         opacity: 1;
       }
     }
     .ant-tabs-tab-active {
-      color: ${props => props.theme.textColor};
+      color: ${props => props.theme.colorStyled.ColorBlack};
       font-weight: bold;
       opacity: 1;
     }
     .ant-tabs-ink-bar {
-      background-color: ${props => props.theme.textColor};
+      background-color: ${props => props.theme.colorStyled.ColorBlack};
     }
   }
   @media (max-width: 1500px) {
@@ -126,7 +126,7 @@ export const ChatbotConversationDetailWrapper = styled(ChatbotConversationListWr
 export const ChatbotContentWrapper = styled.div`
   flex: 1;
   .ant-breadcrumb {
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${props => props.theme.colorStyled.ColorWhite};
     height: 60px;
     display: flex;
     align-items: center;
@@ -225,7 +225,7 @@ export const ConversationButton = styled.div`
   cursor: pointer;
   &:hover {
     background-color: #279cd4;
-    color: ${props => props.theme.secondaryColor};
+    color: ${props => props.theme.colorStyled.ColorWhite};
   }
 `;
 
@@ -285,7 +285,7 @@ export const ConversationInfoWrapper = styled.div`
       }
       .ant-descriptions-item-content {
         font-size: 1em;
-        color: ${props => props.theme.textColor};
+        color: ${props => props.theme.colorStyled.ColorBlack};
       }
     }
     @media (max-width: 1024px) {

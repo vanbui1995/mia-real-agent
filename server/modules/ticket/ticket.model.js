@@ -71,6 +71,12 @@ const ticketSchema = new Schema(
     category: [String],
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
     assignee: { type: Schema.Types.ObjectId, ref: 'User' },
+    rating: {
+      score: {
+        type: Number,
+      },
+      comment: String,
+    },
     deletedAt: {
       type: Date,
       default: null,

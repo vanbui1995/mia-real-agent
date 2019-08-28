@@ -9,6 +9,7 @@ class TicketRouter extends BaseRouter {
     this.router.get('/:id/profile', this.controller.getOwnerAndAssigneeProfile);
     this.router.post('/:id/find_agent', this.controller.findAvailableAgents);
     this.router.post('/:id/close', this.controller.closeTicket);
+    this.router.post('/:id/rating', this.controller.rating);
   }
 }
 export default new TicketRouter(TicketController);

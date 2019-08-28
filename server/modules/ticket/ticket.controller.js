@@ -158,8 +158,8 @@ class TicketController extends BaseController {
         this.service.delete(ticketId);
         throw new APIError('Unable to create ticket', httpStatus.INTERNAL_SERVER_ERROR);
       }
-
-      return res.status(httpStatus.OK).send(result);
+      const createdTicket = await this.service.getByCondition({ _id: ticketId });
+      return res.status(httpStatus.OK).send(createdTicket);
     } catch (error) {
       return this.handleError(res, error);
     }
@@ -220,17 +220,44 @@ class TicketController extends BaseController {
       const oldHistory = history.map(h => h.toJSON());
       const newHistory = getHistoryTicketUpdate(oldHistory, status);
       _.assign(ticket, { status, history: newHistory, unsolvedReason: (unsolvedReason || '') });
-      // const { conversationId, _id } = ticket;
-      // ConversationRoomQueue.ticketClosedNotification(conversationId, _id);
 
       const result = await ticket.save({});
-      // We should send transcript after 1 second for without missing any message
       setTimeout(() => {
         this.service.sendTransciptConverstion(ticket, conversationId);
       }, 1000);
       return res.status(httpStatus.OK).send(result);
     } catch (error) {
       return this.handleError(res, error);
+    }
+  }
+
+  async rating(req, res) {
+    try {
+      const { model, body } = req;
+      const { score, comment } = body;
+      const {
+        owner, assignee, status, conversationId,
+      } = model;
+      _.assign(model, { rating: { score, comment } });
+      const savedModel = await model.save();
+      const { _id } = owner;
+      const ratingMessage = {
+        conversationId,
+        from: _id,
+        type: REPLY_TYPE.RATING_ACTION,
+        messages: 'Ticket Rating',
+        params: {
+          score,
+          comment,
+        },
+      };
+
+      ReplyService.insert(ratingMessage);
+      // Calculate assignee rating
+      UserService.updateRating(assignee, score, status === TICKET_STATUS.SOLVED);
+      return res.status(httpStatus.OK).send(savedModel);
+    } catch (error) {
+      return super.handleError(res, error);
     }
   }
 }

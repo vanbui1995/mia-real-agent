@@ -62,20 +62,6 @@ class ConversationController extends BaseController {
       return this.handleError(res, error);
     }
   }
-
-  async rating(req, res) {
-    try {
-      const { model, body } = req;
-      const { score, comment } = body;
-
-      _.assign(model, { rating: { score, comment } });
-
-      const savedModel = await model.save();
-      return res.status(httpStatus.OK).send(savedModel);
-    } catch (error) {
-      return super.handleError(res, error);
-    }
-  }
 }
 
 export default new ConversationController();

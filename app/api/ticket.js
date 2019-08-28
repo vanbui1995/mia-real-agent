@@ -60,3 +60,8 @@ export const getActivity = () => axios
   .get('admin/tickets/dashboard/activity')
   .then(response => ({ response }))
   .catch(handleError);
+
+export const submitRating = (id, rating) => axios
+  .post(`tickets/${id}/rating`, rating)
+  .then(response => ({ response }))
+  .catch(handleError);

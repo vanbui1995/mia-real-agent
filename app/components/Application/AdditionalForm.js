@@ -7,9 +7,14 @@ import { Formik, FieldArray } from 'formik';
 import { func } from 'prop-types';
 import FormInput from '../FormInput/FormInput';
 import {
-  ApplicationBtn,
-  ArrayTagWrapper, ArrayInputWrapper, ArrayAddButton, ArrayWrapper, TagAction, DescriptionWrapper, DescriptionNumber,
+  ActionFormRegister,
+  ArrayTagWrapper,
+  ArrayInputWrapper, 
+  ArrayWrapper,
+  TagAction,
+
 } from './styles';
+import { ButtonCancel, ButtonSubmit, ArrayAddButton } from '../../stylesheets/Button.style';
 import { AGENT_SKILL, APPLICATION_LANGUAGE } from '../../../common/enums';
 import { toI18n } from '../../utils/func-utils';
 
@@ -214,21 +219,17 @@ export class AdditionalForm extends Component {
                 </Col>
               </Row>
               <Row gutter={32}>
-                <Col sm={12} xs={24}>
-                  <ApplicationBtn
-                    type="button"
-                    onClick={() => this.handleToggleLanguageModal(false)}
-                  >
-                    {toI18n('FORM_CANCEL')}
-                  </ApplicationBtn>
-                </Col>
-                <Col sm={12} xs={24}>
-                  <ApplicationBtn
-                    type="submit"
-                    submit
-                  >
-                    {editIndex >= 0 ? toI18n('FORM_SAVE') : toI18n('FORM_ADD')}
-                  </ApplicationBtn>
+                <Col sm={24} xs={24}>
+                  <ActionFormRegister>
+                    <ButtonCancel
+                      onClick={() => this.handleToggleLanguageModal(false)}
+                    >
+                      {toI18n('FORM_CANCEL')}
+                    </ButtonCancel>
+                    <ButtonSubmit>
+                      {editIndex >= 0 ? toI18n('FORM_SAVE') : toI18n('FORM_ADD')}
+                    </ButtonSubmit>
+                  </ActionFormRegister>
                 </Col>
               </Row>
             </Form>
@@ -313,26 +314,18 @@ export class AdditionalForm extends Component {
   }
 
   renderRegisterBtn = () => (
-    <Row gutter={32}>
-      <Col sm={12} xs={24}>
-        <ApplicationBtn
-          onClick={this.handleCancel}
-          type="button"
-        >
-          <i className="mia-chevron-left" />
-          {toI18n('FORM_BACK')}
-        </ApplicationBtn>
-      </Col>
-      <Col sm={12} xs={24}>
-        <ApplicationBtn
-          type="submit"
-          submit
-        >
-          {toI18n('FORM_SUBMIT')}
-          <i className="mia-chevron-right" />
-        </ApplicationBtn>
-      </Col>
-    </Row>
+    <ActionFormRegister>
+      <ButtonCancel
+        onClick={this.handleCancel}
+      >
+        <i className="mia-chevron-left" />
+        <span>{toI18n('FORM_BACK')}</span>
+      </ButtonCancel>
+      <ButtonSubmit>
+        <span>{toI18n('FORM_NEXT')}</span>
+        <i className="mia-chevron-right" />
+      </ButtonSubmit>
+    </ActionFormRegister>
   )
 
   handleSubmit = (values) => {

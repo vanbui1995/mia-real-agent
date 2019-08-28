@@ -1,8 +1,5 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { Component } from 'react';
-import {
-  Layout, Avatar,
-} from 'antd';
 
 import { string } from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -10,8 +7,8 @@ import { Translation } from 'react-i18next';
 import {
   TopNavBarWrapper,
   Logo,
-  NavBar,
-  Nav,
+  MenuTopNavBar,
+  MenuItem,
   TopbarRight,
   ProfileStyled,
   ProfileImageStyled,
@@ -21,8 +18,6 @@ import {
 import ProfileUser from '../../containers/ProfileUser';
 import { PopupOverlayStyled } from '../Generals/General.styled';
 import { isAgent } from '../../utils/func-utils';
-
-const { Header } = Layout;
 
 export default class TopNavBar extends Component {
   static propTypes = {
@@ -45,63 +40,65 @@ export default class TopNavBar extends Component {
     return (
       <Logo>
         <Link to="/dashboard">
-          <Avatar src={isAgent(userRole) ? '/assets/images/logo-small-white.png' : '/assets/images/user-mia-logo.svg'} />
+          <img
+            alt="logo mia"
+            src={
+              isAgent(userRole)
+                ? '/assets/images/logo-small-white.png'
+                : '/assets/images/user-mia-logo.svg'
+            }
+          />
         </Link>
       </Logo>
     );
-  }
+  };
+
 
   render() {
     const { isUserInfoOpen } = this.state;
     const { email, userRole } = this.props;
     return (
-
-      <TopNavBarWrapper className={!isAgent(userRole) ? 'user' : 'agent'}>
-        <Header>
-          {this.renderLogo()}
-          <NavBar>
-            <Nav>
-              <Link to="/dashboard/ticket">
-                <Translation>
-                  {
-                    t => t('DB_DASHBOARD')
-                  }
-                </Translation>
-              </Link>
-            </Nav>
-            <Nav key="2">
-              <Link to="/conversation">Ticket</Link>
-            </Nav>
-          </NavBar>
-          <TopbarRight>
-            <ProfileStyled>
-              <ProfileImageStyled
-                src={!isAgent(userRole) ? '/assets/images/user-live.jpeg' : '/assets/images/user.svg'}
-                onClick={this.onToggleUserInfo}
-              />
-              {isUserInfoOpen && (
-                <React.Fragment>
-                  <PopupOverlayStyled onClick={this.onToggleUserInfo} />
-                  <ProfileUser
-                    onToggleUserInfo={this.onToggleUserInfo}
-                  />
-                </React.Fragment>
-              )}
-              <UserName onClick={this.onToggleUserInfo}>
-                <span>{email}</span>
-                <Translation>
-                  {
-                    t => <span>{!isAgent(userRole) ? t('USER') : t('AGENT')}</span>
-                  }
-                </Translation>
-              </UserName>
-              <MenuStyled
-                type="down"
-                onClick={this.onToggleUserInfo}
-              />
-            </ProfileStyled>
-          </TopbarRight>
-        </Header>
+      <TopNavBarWrapper
+        className={!isAgent(userRole) ? 'user-account' : 'agent-account'}
+      >
+        {this.renderLogo()}
+        <MenuTopNavBar mode="horizontal">
+          <MenuItem>
+            <Link to="/dashboard/ticket">
+              <Translation>{t => t('DB_DASHBOARD')}</Translation>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/conversation">Ticket</Link>
+          </MenuItem>
+        </MenuTopNavBar>
+        <TopbarRight>
+          <ProfileStyled>
+            <ProfileImageStyled
+              src={
+                !isAgent(userRole)
+                  ? '/assets/images/user-live.jpeg'
+                  : '/assets/images/user.svg'
+              }
+              onClick={this.onToggleUserInfo}
+            />
+            {isUserInfoOpen && (
+              <React.Fragment>
+                <PopupOverlayStyled onClick={this.onToggleUserInfo} />
+                <ProfileUser onToggleUserInfo={this.onToggleUserInfo} />
+              </React.Fragment>
+            )}
+            <UserName onClick={this.onToggleUserInfo}>
+              <span>{email}</span>
+              <Translation>
+                {t => (
+                  <span className="type-user">{!isAgent(userRole) ? t('USER') : t('AGENT')}</span>
+                )}
+              </Translation>
+            </UserName>
+            <MenuStyled type="down" onClick={this.onToggleUserInfo} />
+          </ProfileStyled>
+        </TopbarRight>
       </TopNavBarWrapper>
     );
   }

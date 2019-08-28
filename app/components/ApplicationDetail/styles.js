@@ -13,7 +13,7 @@ export const ArrayTagWrapper = styled.div`
   margin: 10px;  
   border: 1px solid #efeaea;
   position: relative;
-  color: ${props => props.theme.textColorTertiary};
+  color: ${props => props.theme.colorStyled.ColorBlackTertiary};
 
   h2 {
     white-space: nowrap; 

@@ -4,11 +4,12 @@ import {
   Steps, Tabs, Icon,
   notification,
 } from 'antd';
-import ShadowScrollbars from 'components/Scrollbar';
+
 import { func, bool, string } from 'prop-types';
+import { ButtonChoose } from '../../stylesheets/Button.style';
 import {
-  ApplicationWrapper, ApplicationItem,
-  ApplicationTitle, RoleWrapper,
+  ApplicationWrapper, ApplicationBlock,
+  ApplicationTitle, RoleChoose,
   SubmitSuccess,
 } from './styles';
 import BasicInfoForm from './BasicInfoForm';
@@ -21,11 +22,6 @@ import { toI18n } from '../../utils/func-utils';
 
 const { Step } = Steps;
 const { TabPane } = Tabs;
-
-const scrollStyle = {
-  // height: 'calc(100vh - 275px)',
-  margin: '0 -20px 0 -10px',
-};
 
 export class ApplicationForm extends Component {
   static propTypes = {
@@ -115,26 +111,20 @@ export class ApplicationForm extends Component {
     return (
       <Tabs activeKey={step.toString()}>
         <TabPane tab="" key="0">
-          <RoleWrapper>
-            <button
-              type="button"
+          <RoleChoose>
+            <ButtonChoose
               onClick={() => this.handleNextStep(APPLICATION_TYPE.FREELANCER)}
             >
-              <div>
-                <Icon type="user" />
-                {toI18n('APPLICATION_FORM_FREELANCER')}
-              </div>
-            </button>
-            <button
-              type="button"
+              <Icon type="user" />
+              <span>{toI18n('APPLICATION_FORM_FREELANCER')}</span>
+            </ButtonChoose>
+            <ButtonChoose
               onClick={() => this.handleNextStep(APPLICATION_TYPE.DEDICATED)}
             >
-              <div>
-                <Icon type="usergroup-add" />
-                {toI18n('APPLICATION_FORM_DEDICATED')}
-              </div>
-            </button>
-          </RoleWrapper>
+              <Icon type="usergroup-add" />
+              <span>{toI18n('APPLICATION_FORM_DEDICATED')}</span>
+            </ButtonChoose>
+          </RoleChoose>
         </TabPane>
         <TabPane tab="" key="1">
           <BasicInfoForm onSubmit={this.handleNextStep} onCancel={this.handlePreviousStep} />
@@ -167,10 +157,10 @@ export class ApplicationForm extends Component {
     const { step } = this.state;
     return (
       <ApplicationWrapper>
-        <ApplicationItem>
+        <ApplicationBlock>
           <ApplicationTitle>
             <img className="img" src="/assets/images/logo-small-black.png" alt="logo mia" />
-            <span className="ApplicationText">
+            <span className="applicationText">
               {toI18n('APPLICATION_FORM_TITLE')}
             </span>
           </ApplicationTitle>
@@ -186,11 +176,9 @@ export class ApplicationForm extends Component {
               </Steps>
             )}
           <LoadingSpin loading={isSubmitting}>
-            {/* <ShadowScrollbars autoHide style={scrollStyle}>
-            </ShadowScrollbars> */}
             {this.handleRenderForm()}
           </LoadingSpin>
-        </ApplicationItem>
+        </ApplicationBlock>
       </ApplicationWrapper>
     );
   }

@@ -1,31 +1,52 @@
 import styled, { css, keyframes } from 'styled-components';
-import { Input } from 'antd';
+import { LoginWrapper } from '../Login/styles';
 
-export const ApplicationWrapper = styled.div`
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url('../../assets/images/bg-login.jpg');
-  background-position: left center;
-  background-size: cover;
-  background-repeat: no-repeat;
+const spin = keyframes`
+  100% {
+    transform:rotate(360deg);
+  }
+`;
 
+export const SelectStyled = { width: '100%' };
+
+export const ApplicationWrapper = styled(LoginWrapper)`
   textarea.ant-input {
     resize: none;
   }
 `;
 
-export const ApplicationItem = styled.div`
-  
+export const ApplicationTitle = styled.div`
+  text-align: center;
+  font-size: 2em;
+  width: 14.125em;
+  height: 5.063em;
+  margin: 0 auto 1.5em;
+  color: ${props => props.theme.colorStyled.ColorBlack};
+  .applicationText {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 40px;
+    display: inline-block;
+    color: ${props => props.theme.colorStyled.ColorXXLightGrey} ;
+    width: 100%;
+  }
+  img {
+    width: 100%;
+    object-position: bottom;
+    height: 100%;
+    max-height: 115px;
+    max-width: 175px;
+    object-fit: contain;
+  }
+`;
+
+export const ApplicationBlock = styled.div`
   padding: 2em;
-  width: 850px;
+  width: 53.125em;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
-  box-shadow: 0px 0px 12px -2px #2a3a51;
-  color: #6e6c83fa;
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
+  box-shadow: ${props => props.theme.boxShandow.loginPage};
   position: relative;
   z-index: 1;
   .ant-tabs-nav-wrap{
@@ -98,73 +119,26 @@ export const ApplicationItem = styled.div`
   .ant-steps-item.ant-steps-item-finish {
     &:before,
     &:after {
-      background-color: ${props => props.theme.primaryColor} !important;
+      background-color: ${props => props.theme.colorStyled.ColorBgDefault} !important;
     }
     .ant-steps-item-icon {
       span {
-        color: ${props => props.theme.secondaryColor} !important;
+        color: ${props => props.theme.colorStyled.ColorWhite} !important;
       }
     }
     .ant-steps-item-title {
-      color: ${props => props.theme.secondaryColor} !important;
+      color: ${props => props.theme.colorStyled.ColorWhite} !important;
     }
   }
   .ant-tabs-bar {
     display: none;
   }
 `;
-
-export const ApplicationTitle = styled.div`
-  text-align: center;
-  font-size: 2em;
-  width: 14.125em;
-  height: 5.063em;
-  margin: 0 auto 1.5em;
-  color: ${props => props.theme.textColor};
-  span{
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 40px;
-    display: inline-block;
-    color: #6e6c83fa;
-    width: 100%;
-  }
-  img{
-    width: 100%;
-    object-position: bottom;
-    height: 100%;
-    max-height: 115px;
-    max-width: 175px;
-    object-fit: contain;
-  }
+export const RoleChoose = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
-export const ApplicationInputWrapper = styled.div`
-  width: 100%;
-  text-align: left;
-  margin-bottom: 30px;
-`;
-
-export const ApplicationInput = styled(Input)`
-  width: 100% !important;
-  height: 27.5px !important;
-  border: 0 !important;
-  padding: 0 !important;
-  outline: 0 none !important;
-  -webkit-transition: border-color .2s linear !important;
-  transition: border-color .2s linear !important;
-  border-bottom: 1px solid #000 !important;
-  -webkit-font-smoothing: antialiased !important;
-  border-radius: 0 !important;  
-  :focus {
-    box-shadow: none !important;
-  }
-`;
-
-export const ApplicationLabel = styled.div`
-  margin-bottom: 7.5px;
-  color: ${props => props.theme.textColor};
-`;
 
 export const ApplicationBtnWrap = styled.div`
   display: flex;
@@ -175,65 +149,22 @@ export const ApplicationBtnWrap = styled.div`
   }
 `;
 
-export const ApplicationBtn = styled.button`
-  min-width: 100px;
-  margin-top: 20px;
-  padding: 8px 25px;
-  border-radius: 5px;
-  border: 1px solid #eee;
-  transition: .3s ease;
-  background: #eee;
-  color: #aaa;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
+export const ActionFormRegister = styled.div`
+  display:flex;
   align-items: center;
-  i {
-    font-size: 12px;
-    font-weight: 700;
-    margin-right: 5px;
-  }
-  &:hover {
-    opacity: 0.7;
-  }
+  justify-content: space-between;
+  margin-top: 2em;
   ${({ submit }) => submit && css`
     margin-left: auto;
-    border: 1px solid ${props => props.theme.primaryColor};
-    background: ${props => props.theme.primaryColor};
-    color: ${props => props.theme.secondaryColor};
+    border: 1px solid ${props => props.theme.colorStyled.ColorBgDefault};
+    background: ${props => props.theme.colorStyled.ColorBgDefault};
+    color: ${props => props.theme.colorStyled.ColorWhite};
     i {
       margin-left: 5px;
       margin-right: 0px;
     }
   `}
 `;
-
-
-export const ApplicationFooter = styled.div`
-  margin-top: 15px;
-  text-align: center;
-`;
-
-export const ApplicationFooterText = styled.span`
-`;
-
-export const ApplicationFooterLink = styled.a`
-  margin-left: 3px;
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const spin = keyframes`
-  100% {
-    transform:rotate(360deg);
-  }
-`;
-
 export const ApplicationSpinner = styled.div`
   border: 2px solid;
   width: 15px;
@@ -251,13 +182,11 @@ export const ApplicationErrorMessage = styled.div`
   margin-bottom: 15px;
 `;
 
-export const SelectStyled = { width: '100%' };
-
 export const ArrayInputWrapper = styled.div`
   overflow: hidden;
   margin-bottom: 20px;
   margin-top: 20px;
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
 
   p{
     margin-top: 3px;
@@ -280,7 +209,7 @@ export const ArrayTagWrapper = styled.div`
   padding: 15px 0px;    
   border-bottom: 1px solid #efeaea;
   position: relative;
-  color: ${props => props.theme.textColorTertiary};
+  color: ${props => props.theme.colorStyled.ColorBlackTertiary};
 
   .WorkEducation{
     align-items: center;
@@ -450,65 +379,6 @@ export const TagAction = styled.div`
     margin-left: 15px;
     &:hover{
       color: red;
-    }
-  }
-`;
-
-export const ArrayAddButton = styled.button`
-  display: flex;
-  align-items: center;
-  margin-right: 5px;
-  border-radius: 5px;
-  padding: 5px 10px 5px 5px;
-  font-size: 13px;
-  border-radius: 3px;
-  color: #ff5402;
-  background: white;
-  border: 1px solid #ff5402;
-  i {
-    margin-right: 3px;
-  }
-  &:hover {
-    border-color: ${props => props.theme.primaryColor};
-    color: ${props => props.theme.primaryColor};
-  }
-`;
-
-export const RoleWrapper = styled.div`
-  > button {
-    width: calc(50% - 10px);
-    background: transparent;
-    border: none;
-    height: 200px;
-    &:first-child {
-      margin-right: 10px;
-    }
-    &:last-child {
-      margin-left: 10px;
-    }
-    &:hover {
-      border-color: ${props => props.theme.primaryColor};
-      div {
-        color: ${props => props.theme.primaryColor};
-      }
-    }
-    div {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      color: ${props => props.theme.cancelColor};
-      color: #2f2f2f;
-      font-size: 22px;
-      
-      i {
-        width: 100%;
-        height: 35px;
-        svg {
-          width: 100%;
-          height: 100%;
-        }
-      }
     }
   }
 `;

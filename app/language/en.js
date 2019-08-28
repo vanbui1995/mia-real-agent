@@ -44,6 +44,8 @@ const en = {
     // Conversation Chat info
     CONV_MESSAGE_BOX_USER_IS: 'is',
     CONV_MESSAGE_BOX_TICKET_CHANGED_TO: 'Ticket changed to',
+    CONV_MESSAGE_BOX_TICKET_RATING: 'has rated',
+    CONV_MESSAGE_BOX_TICKET_RATING_COMMENT: 'with comment',
     // Conversation Detail
     CONV_MESSAGE_BOX_DETAIL_STATUS: 'Status',
     CONV_MESSAGE_BOX_DETAIL_TICKET: 'Ticket',

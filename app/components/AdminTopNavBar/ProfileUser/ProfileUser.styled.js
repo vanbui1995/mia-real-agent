@@ -8,7 +8,7 @@ export const ProfileUserInfoWrapper = styled.div`
   box-shadow: -2px 5px 10px 1px rgba(0, 0, 0, 0.176);
   width: 13em;
   z-index: 1;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
 `;
 
 export const ProfileUserHead = styled.div`

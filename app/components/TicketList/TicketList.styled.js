@@ -126,7 +126,7 @@ export const TicketFilterWrapper = styled.div.attrs({
     width: 100%;
   }
   .ant-select-selection--multiple {
-    color: ${props => props.theme.secondaryColor};
+    color: ${props => props.theme.colorStyled.ColorWhite};
     border: 1px solid #d9d9d9;
     .ant-select-selection__rendered{
       margin-bottom: 2px!important;
@@ -157,20 +157,20 @@ export const TicketPaginationWrapper = styled.div`
     line-height: normal !important;
     &:hover {
       a {
-        color: ${props => props.theme.primaryColor};
+        color: ${props => props.theme.colorStyled.ColorBgDefault};
       }
     }
   }
   .ant-pagination-item.ant-pagination-item-active a {
-    color: ${props => props.theme.textColor};
+    color: ${props => props.theme.colorStyled.ColorBlack};
   }
   .ant-pagination-item-active {
     border: none;
     a {
-      color: ${props => props.theme.primaryColor} !important;
+      color: ${props => props.theme.colorStyled.ColorBgDefault} !important;
     }
     &:hover {
-      color: ${props => props.theme.primaryColor};
+      color: ${props => props.theme.colorStyled.ColorBgDefault};
     }
   }
   @media (max-width: 840px) {

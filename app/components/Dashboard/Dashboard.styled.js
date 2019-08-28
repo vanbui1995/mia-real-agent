@@ -12,7 +12,7 @@ export const DashboardItem = styled.div`
   max-width: 1280px;
   height: 100%;
   margin: 0 auto;
-  background-color: ${props => props.theme.secondaryColor}
+  background-color: ${props => props.theme.colorStyled.ColorWhite}
   box-shadow: 0px 0px 8px -2px #d9d9d9;
   .ant-tabs-bar {
     margin: 16px 0px;

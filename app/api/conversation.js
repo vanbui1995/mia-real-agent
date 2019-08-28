@@ -30,8 +30,3 @@ export const removeConversation = id => axios
   .delete(`conversations/${id}`)
   .then(response => ({ response }))
   .catch(handleError);
-
-export const submitRating = (id, rating) => axios
-  .post(`conversations/${id}/rating`, rating)
-  .then(response => ({ response }))
-  .catch(handleError);

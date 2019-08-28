@@ -4,10 +4,10 @@ import { COLOR_BY_STATUS } from '../../../common/enums';
 
 export const TableHeadWrapper = styled.div`
   display: flex;
-  border-top: 1px solid ${props => props.theme.textColorSecondary};
+  border-top: 1px solid ${props => props.theme.colorStyled.ColorBlackSecondary};
   border-bottom: 1px solid #d9d9d9;
   color: #666;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   font-weight: 700;
   line-height: 1.4;
   font-size: 12px;
@@ -73,7 +73,7 @@ export const TableContentItem = styled.div`
   flex: 1;
   border: none;
   min-height: 68px;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   border-radius: 3px;
   &:hover {
     background-color: #f7f7f7;
@@ -164,7 +164,7 @@ export const MoreActionWrapper = styled.div`
   min-width: 160px;
   padding: 5px 0;
   margin: 2px 0 0;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   border: 1px solid #ccc;
   border-radius: 2px;
   box-shadow: 0 6px 12px #0000002d;
@@ -177,7 +177,7 @@ export const MoreActionItem = styled.div`
   line-height: 1.4;
   font-size: 13px;
   &:hover {
-    color: ${props => props.theme.secondaryColor};
+    color: ${props => props.theme.colorStyled.ColorWhite};
     background-color: #2e8fda;
   }
 `;
@@ -244,7 +244,7 @@ export const TableHead = styled.div`
 
 export const TableRow = styled(TableHead)`
   text-transform: none;
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
   .icon-dots {
     font-size: 10px;
     color: #eee;
@@ -288,7 +288,7 @@ export const TableRow = styled(TableHead)`
       }
     `};
   a {
-    color: ${props => props.theme.textColor};
+    color: ${props => props.theme.colorStyled.ColorBlack};
   }
 `;
 

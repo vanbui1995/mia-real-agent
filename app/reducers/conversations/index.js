@@ -11,10 +11,6 @@ export const CONVERSATION_GET_DETAIL_FAILED = 'conversations/CONVERSATION_GET_DE
 
 export const CONVERSATION_SET_CURRENT = 'conversations/CONVERSATION_SET_CURRENT';
 
-export const CONVERSATION_RATING_SUBMIT = 'conversations/CONVERSATION_RATING_SUBMIT';
-export const CONVERSATION_RATING_SUBMIT_SUCCESS = 'conversations/CONVERSATION_RATING_SUBMIT_SUCCESS';
-export const CONVERSATION_RATING_SUBMIT_FAIL = 'conversations/CONVERSATION_RATING_SUBMIT_FAIL';
-
 export const USER_JOIN_CONVERSATION = 'conversations/USER_JOIN_CONVERSATION';
 
 export const USER_LEFT_CONVERSATION = 'conversations/USER_LEFT_CONVERSATION';
@@ -70,33 +66,6 @@ const notifiSystemMessage = (systemMessage, conversationId) => ({
   payload: {
     conversationId,
     systemMessage,
-  },
-});
-
-// SUBMIT CONVERSATION RATING
-
-const submitConversationRating = (conversationId, { score, comment }) => ({
-  type: CONVERSATION_RATING_SUBMIT,
-  payload: {
-    conversationId,
-    rating: {
-      score,
-      comment,
-    },
-  },
-});
-
-const submitConversationRatingSuccess = conversation => ({
-  type: CONVERSATION_RATING_SUBMIT_SUCCESS,
-  payload: {
-    conversation,
-  },
-});
-
-const submitConversationRatingFailed = error => ({
-  type: CONVERSATION_RATING_SUBMIT_FAIL,
-  payload: {
-    error,
   },
 });
 
@@ -277,14 +246,6 @@ function conversationReducer(state = initialState, action) {
         .set('total', state.get('total') + 1);
     }
 
-    case CONVERSATION_RATING_SUBMIT_SUCCESS: {
-      const { conversation } = action.payload;
-      let newState = state;
-      newState = newState.setIn(['byId', conversation._id], conversation);
-      return newState;
-    }
-
-
     default: {
       return state;
     }
@@ -299,10 +260,6 @@ export const actions = {
   fetchConversation,
   fetchConversationSuccess,
   fetchConversationFailed,
-
-  submitConversationRating,
-  submitConversationRatingSuccess,
-  submitConversationRatingFailed,
 
   selectConversation,
 

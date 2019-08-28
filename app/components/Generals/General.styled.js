@@ -2,8 +2,8 @@
 import styled, { css } from 'styled-components';
 
 export const DefaultButton = styled.button`
-  color: ${props => props.theme.secondaryColor};
-  background-color: ${props => props.theme.primaryColor};
+  color: ${props => props.theme.colorStyled.ColorWhite};
+  background-color: ${props => props.theme.colorStyled.ColorBgDefault};
   text-align: center;
   border: 1px solid transparent;
   border-radius: 3px;
@@ -15,13 +15,13 @@ export const DefaultButton = styled.button`
     opacity: 0.8;
   }
   ${({ submit }) => submit && css`
-    background-color:  ${props => props.theme.submitColor};
+    background-color:  ${props => props.theme.colorStyled.ColoraBtnPrimary};
   `};
   ${({ cancel }) => cancel && css`
-    background-color:  ${props => props.theme.cancelColor};
+    background-color:  ${props => props.theme.colorStyled.ColoraBtnCancel};
   `};
   ${({ error }) => error && css`
-    background-color:  ${props => props.theme.errorColor};
+    background-color:  ${props => props.theme.colorStyled.ColorWarming};
   `};
 `;
 
@@ -46,7 +46,7 @@ export const PopupOverlayStyled = styled.div`
   z-index: 1;
   ${({ isOverlay }) => isOverlay
     && css`
-      background: ${props => props.theme.secondaryColor};
+      background: ${props => props.theme.colorStyled.ColorWhite};
       opacity: 0.5;
       z-index: 4;
     `};
@@ -56,43 +56,43 @@ export const IconStyled = styled.i`
   ${({ close }) => close
     && css`
       border-radius: 100%;
-      border: 1px solid ${props => props.theme.iconCloseColor};
+      border: 1px solid ${props => props.theme.colorStyled.ColorIcon};
       font-size: 14px;
-      color: ${props => props.theme.iconCloseColor};
+      color: ${props => props.theme.colorStyled.ColorIcon};
       margin: 0px 2px;
       &:hover {
-        border-color: ${props => props.theme.iconCloseHoverColor};
-        color: ${props => props.theme.iconCloseHoverColor};
+        border-color: ${props => props.theme.colorStyled.ColorIconHover};
+        color: ${props => props.theme.colorStyled.ColorIconHover};
       }
     `};
   ${({ add }) => add
     && css`
       border-radius: 100%;
-      border: 1px solid ${props => props.theme.iconAddColor};
+      border: 1px solid ${props => props.theme.colorStyled.iconAddColor};
       font-size: 14px;
-      color: ${props => props.theme.iconAddColor};
+      color: ${props => props.theme.colorStyled.iconAddColor};
       margin: 0px 2px;
       &:hover {
-        border-color: ${props => props.theme.iconAddHoverColor};
-        color: ${props => props.theme.iconAddHoverColor};
+        border-color: ${props => props.theme.colorStyled.iconAddHoverColor};
+        color: ${props => props.theme.colorStyled.iconAddHoverColor};
       }
     `};
   ${({ more }) => more
     && css`
       border-radius: 100%;
-      border: 1px solid ${props => props.theme.iconMoreColor};
+      border: 1px solid ${props => props.theme.colorStyled.iconMoreColor};
       font-size: 14px;
-      color: ${props => props.theme.iconMoreColor};
+      color: ${props => props.theme.colorStyled.iconMoreColor};
       margin: 0px 2px;
       &:hover {
-        border-color: ${props => props.theme.iconMoreHoverColor};
-        color: ${props => props.theme.iconMoreHoverColor};
+        border-color: ${props => props.theme.colorStyled.iconMoreHoverColor};
+        color: ${props => props.theme.colorStyled.iconMoreHoverColor};
       }
     `};
 
   ${({ active }) => active
     && css`
-      color: ${props => props.theme.submitColor} !important;
+      color: ${props => props.theme.colorStyled.ColoraBtnPrimary} !important;
     `};
   ${({ shipping }) => shipping
     && css`
@@ -108,13 +108,13 @@ export const RadioButtonToggle = styled.div`
       appearance: none;
       width: 44px;
       height: 22px;
-      background-color: ${props => props.theme.secondaryColor};
+      background-color: ${props => props.theme.colorStyled.ColorWhite};
       position: relative;
       border-radius: 30px;
       box-shadow: none;
       transition: all 300ms ease-in-out;
       &:hover:after {
-        background-color: ${props => props.theme.secondaryColor};
+        background-color: ${props => props.theme.colorStyled.ColorWhite};
       }
       &:after {
         content: '';
@@ -122,7 +122,7 @@ export const RadioButtonToggle = styled.div`
         position: absolute;
         width: 18px;
         height: 18px;
-        background-color: ${props => props.theme.secondaryColor};
+        background-color: ${props => props.theme.colorStyled.ColorWhite};
         top: 2px;
         left: 2px;
         border-radius: 50%;
@@ -130,10 +130,10 @@ export const RadioButtonToggle = styled.div`
       }
     }
     &:checked.toggle {
-      box-shadow: inset 0 0 0 15px ${props => props.theme.submitColor};
+      box-shadow: inset 0 0 0 15px ${props => props.theme.colorStyled.ColoraBtnPrimary};
       &:after {
         left: 23px;
-        background-color: ${props => props.theme.secondaryColor};
+        background-color: ${props => props.theme.colorStyled.ColorWhite};
       }
     }
   }
@@ -142,9 +142,9 @@ export const RadioButtonToggle = styled.div`
 export const HeaderTitleWrapper = styled.div`
   width: 100%;
   padding: 20px;
-  border-bottom: 1px solid ${props => props.theme.secondaryColor};
+  border-bottom: 1px solid ${props => props.theme.colorStyled.ColorWhite};
   min-height: 21.43px;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   color: #222;
   display: flex;
   align-items: center;
@@ -157,7 +157,7 @@ export const ActionModalWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 20px;
-  border-top: 1px solid ${props => props.theme.secondaryColor};
+  border-top: 1px solid ${props => props.theme.colorStyled.ColorWhite};
 `;
 
 export const ActionGroupWrapper = styled.div`
@@ -166,10 +166,10 @@ export const ActionGroupWrapper = styled.div`
   left: 200px;
   padding: 15px;
   box-shadow: 0 -4px 5px -3px rgba(0, 0, 0, 0.1);
-  background: ${props => props.theme.secondaryColor};
+  background: ${props => props.theme.colorStyled.ColorWhite};
   width: 100%;
   z-index: 1;
-  border-top: 1px solid ${props => props.theme.secondaryColor};
+  border-top: 1px solid ${props => props.theme.colorStyled.ColorWhite};
   height: 65px;
   max-height: 65px;
   @media (max-width: 1280px) {
@@ -178,8 +178,8 @@ export const ActionGroupWrapper = styled.div`
 `;
 
 export const SubmitButtonStyled = styled.button`
-  color: ${props => props.theme.secondaryColor};
-  background-color: ${props => props.theme.submitColor};
+  color: ${props => props.theme.colorStyled.ColorWhite};
+  background-color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
   text-align: center;
   border: 1px solid transparent;
   border-radius: 3px;
@@ -192,7 +192,7 @@ export const SubmitButtonStyled = styled.button`
 
 export const CancelButtonStyled = styled.button`
   text-align: center;
-  border: 1px solid ${props => props.theme.secondaryColor};
+  border: 1px solid ${props => props.theme.colorStyled.ColorWhite};
   border-radius: 3px;
   padding: 6px 12px;
   margin-left: 10px;
@@ -203,7 +203,7 @@ export const CancelButtonStyled = styled.button`
 `;
 
 export const ErrorMessageStyled = styled.div`
-  color: ${props => props.theme.errorColor};
+  color: ${props => props.theme.colorStyled.ColorWarming};
   margin-left: 20px;
   margin-bottom: 20px;
 `;
@@ -215,8 +215,8 @@ export const ActionButton = styled.div`
     cursor: pointer;
     max-width: 200px;
     background-color: #556080;
-    color: ${props => props.theme.secondaryColor};
-    border: ${props => props.theme.secondaryColor};
+    color: ${props => props.theme.colorStyled.ColorWhite};
+    border: ${props => props.theme.colorStyled.ColorWhite};
     margin: 0px 5px;
     font-weight: 600;
     &:hover {
@@ -280,9 +280,9 @@ export const ButtonGroupWrapper = styled.div`
 `;
 
 export const ConfirmModalWrapper = styled.div`
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   border-radius: 7px;
-  border: 1px solid ${props => props.theme.secondaryColor};
+  border: 1px solid ${props => props.theme.colorStyled.ColorWhite};
   box-shadow: 0 3px 9px #00000080;
   position: fixed;
   top: 50px;
@@ -296,8 +296,8 @@ export const ConfirmModalWrapper = styled.div`
 
 export const HistoryWrapper = styled.div`
   padding: 20px;
-  background-color: ${props => props.theme.secondaryColor};
-  border-bottom: 1px solid ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
+  border-bottom: 1px solid ${props => props.theme.colorStyled.ColorWhite};
 `;
 
 export const HistoryListWrapper = styled.div`
@@ -310,7 +310,7 @@ export const HistoryItem = styled.div`
   position: relative;
   &:before {
     content: '';
-    border-left: 1px solid ${props => props.theme.secondaryColor};
+    border-left: 1px solid ${props => props.theme.colorStyled.ColorWhite};
     position: absolute;
     left: 162px;
     top: 0;
@@ -347,8 +347,8 @@ export const HistoryContent = styled.div`
   }
   i {
     margin-right: 10px;
-    background: ${props => props.theme.secondaryColor};
-    border: 1px solid ${props => props.theme.secondaryColor};
+    background: ${props => props.theme.colorStyled.ColorWhite};
+    border: 1px solid ${props => props.theme.colorStyled.ColorWhite};
     border-radius: 50%;
     flex: 0 0 25px;
     height: 25px;
@@ -388,11 +388,11 @@ export const HistoryComment = styled.div`
     font-size: 13px;
     border: 1px solid #b0c0d6;
     border-radius: 3px;
-    background: ${props => props.theme.secondaryColor};
+    background: ${props => props.theme.colorStyled.ColorWhite};
     padding: 2px 8px;
     outline: none;
     &:hover {
-      border-color: ${props => props.theme.submitColor};
+      border-color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
     }
     &::placeholder {
       font-size: 13px;
@@ -405,16 +405,16 @@ export const HistoryComment = styled.div`
     padding: 5px 10px;
   }
   button {
-    background-color: ${props => props.theme.submitColor};
+    background-color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
     text-align: center;
     border: 1px solid transparent;
     border-radius: 3px;
-    color: ${props => props.theme.secondaryColor} !important;
+    color: ${props => props.theme.colorStyled.ColorWhite} !important;
     padding: 6px 12px !important;
     margin-top: 10px;
     &:hover {
-      background-color: ${props => props.theme.iconMoreColor};
-      border-color: ${props => props.theme.iconMoreColor};
+      background-color: ${props => props.theme.colorStyled.iconMoreColor};
+      border-color: ${props => props.theme.colorStyled.iconMoreColor};
     }
   }
 `;
@@ -423,7 +423,7 @@ export const ViewMoreAction = styled.div`
   margin-bottom: 10px;
   button {
     font-size: 13px;
-    color: ${props => props.theme.submitColor};
+    color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
     padding: 0px;
   }
 `;

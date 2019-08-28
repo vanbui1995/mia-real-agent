@@ -32,7 +32,6 @@ export const send = async (content, recipients) => {
       recipients,
     };
     const response = await axios.post(SPARK_POST_API_URL, data, config);
-    console.log(response);
   } catch (error) {
     console.log(error);
     Logger.error('Error while trying to send mail', error);

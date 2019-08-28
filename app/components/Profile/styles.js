@@ -19,7 +19,7 @@ export const ProfileCard = styled.div`
   background-color: #ffffff;
   box-shadow: 0 3px 10px 3px #e7e7e7;
   padding: 50px;
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
 `;
 
 export const ProfileTitle = styled.div`
@@ -44,7 +44,7 @@ export const InputStyled = styled.div`
 `;
 
 export const InputLabelStyled = styled.div`
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
   label{
     float: left;
     ::after{

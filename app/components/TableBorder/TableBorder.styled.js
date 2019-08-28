@@ -38,7 +38,7 @@ export const TableLoadingStyled = styled.div`
   position: absolute;
   width: 100%;
   height: calc(100% - 40px);
-  background: ${props => props.theme.secondaryColor};
+  background: ${props => props.theme.colorStyled.ColorWhite};
   z-index: 1;
   top: 40px;
 `;

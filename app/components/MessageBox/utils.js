@@ -8,7 +8,10 @@ export const combineChat = (replyMessages = []) => {
       _id, from, type, params,
       messages, sentAt,
     } = message;
-    if (type === REPLY_TYPE.TICKET_STATUS || type === REPLY_TYPE.USER_ACTION) {
+    if (type === REPLY_TYPE.TICKET_STATUS
+      || type === REPLY_TYPE.USER_ACTION
+      || type === REPLY_TYPE.RATING_ACTION
+    ) {
       combined.push({
         _id: combined.length, type, from, params, sentAt,
       });

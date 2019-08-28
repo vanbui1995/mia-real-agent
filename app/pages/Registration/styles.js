@@ -1,22 +1,14 @@
 import styled from 'styled-components';
+import { LoginWrapper } from '../../components/Login/styles';
 
-export const RegistrationWrapper = styled.div`
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url('../../assets/images/bg-login.jpg');
-  background-position: left center;
-  background-size: cover;
-  background-repeat: no-repeat;
+export const RegistrationWrapper = styled(LoginWrapper)`
 `;
 
 export const RegistrationItem = styled.div`
   width: 720px;
   display: flex;
   flex-direction: column;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   box-shadow: 0px 0px 12px -2px #2a3a51;
   padding: 50px 50px 85px 50px;
   color: #6e6c83fa;
@@ -40,7 +32,7 @@ export const LinkWrapper = styled.div`
   a {
     width: 100%;
     text-align: center;
-    color: ${props => props.theme.cancelColor};
+    color: ${props => props.theme.colorStyled.ColoraBtnCancel};
     color: #2f2f2f;
     font-size: 22px;
     i {
@@ -52,8 +44,8 @@ export const LinkWrapper = styled.div`
       }
     }
     
-    :hover {
-      color: ${props => props.theme.submitColor};
+    &:hover {
+      color: ${props => props.theme.colorStyled.ColorBgDefault};
     }
   }
 `;

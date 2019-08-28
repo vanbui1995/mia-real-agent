@@ -7,7 +7,7 @@ import { COLOR_BY_STATUS, COLOR_BY_ACTION } from '../../../common/enums';
 export const MessageBoxWrapper = styled.div`
   display: flex;
   height: calc(100vh - 123px);
-  background: ${props => props.theme.secondaryColor};
+  background: ${props => props.theme.colorStyled.ColorWhite};
   position: relative;
 `;
 
@@ -16,6 +16,9 @@ export const MessageBoxContent = styled.div`
   height: 100%;
   color: #000;
   background-color: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const MessageBoxItem = styled.div`
@@ -50,7 +53,7 @@ export const MessageBoxItem = styled.div`
     }
     p {
       float: right;
-      color: ${props => props.theme.secondaryColor};
+      color: ${props => props.theme.colorStyled.ColorWhite};
       background-color: #ff5504;
     }
     > div{
@@ -66,7 +69,7 @@ export const ConversationHeaderTitle = styled.div`
   display: flex;
   flex-direction: column;
   .ant-breadcrumb-link {
-    color: ${props => props.theme.textColor};
+    color: ${props => props.theme.colorStyled.ColorBlack};
   }
 
 `;
@@ -119,7 +122,7 @@ export const MessageInputWrapper = styled.div`
   bottom: 0px;
   display: flex;
   align-items: center;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   border-top: 1px solid #ddd;
   height: 60px;
   width: 100%;
@@ -169,7 +172,7 @@ export const InputAction = styled.label`
   color: #b5b5b5;
   cursor: pointer;
   &:hover {
-    color: ${props => props.theme.textColor};
+    color: ${props => props.theme.colorStyled.ColorBlack};
   }
 `;
 
@@ -179,28 +182,34 @@ export const InputUpload = styled.input`
 
 export const RatingWrapper = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  flex: 0 0 180px;
 `;
 
 export const RatingContent = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   ul{
     padding-left: 4px; 
+  }
+  form {
+    width: 100%;
   }
 `;
 
 export const CommentInputWrapper = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   border-top: 1px solid #ddd;
   height: 100px;
-  width: 350px;
+  width: 100%;
   padding: 0px 10px;
   margin-top: 10px;
   .ant-form-item{
@@ -234,6 +243,14 @@ export const TicketActionStatusTitle = styled.span`
   font-weight: 600;
   font-style: italic;
   color: ${({ status }) => [COLOR_BY_STATUS[status]]};
+`;
+
+export const TicketRatingScore = styled.span`
+  font-weight: 600;
+  font-style: italic;
+  color: #ffd400;
+  font-size: 1.5em;
+  margin: 0 5px;
 `;
 
 export const UserAction = styled.span`
@@ -320,4 +337,10 @@ export const ProfileImageStyled = styled.img`
   height: 35px;
   cursor: pointer;
   border-radius: 100%;
+`;
+
+export const CommentWrapper = styled.div`
+  text-align: center;
+  color: #7a7a7a;
+  font-weight: 600;
 `;

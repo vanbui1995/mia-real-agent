@@ -12,7 +12,7 @@ align-items: center;
 justify-content: space-between;
 border: 1px solid #dae1e4;
 border-radius: 7px;
-background-color: ${props => props.theme.secondaryColor};
+background-color: ${props => props.theme.colorStyled.ColorWhite};
 margin-bottom: 15px;
 padding: 15px 18px;
 height: 50px;

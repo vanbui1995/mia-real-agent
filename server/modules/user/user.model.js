@@ -25,6 +25,23 @@ const userSchema = new Schema(
       phone: { type: String, trim: true },
       address: { type: String, required: false },
     },
+    rating: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    // indicate number of solved ticket for agent
+    solved: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    // indicate number of unsolved ticket for agent
+    unsolved: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     verifiedAt: {
       type: Date,
       default: null,

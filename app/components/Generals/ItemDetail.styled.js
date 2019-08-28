@@ -10,23 +10,23 @@ export const ItemDetailWrapper = styled.div`
 
 export const ItemDetailListWrapper = styled.div`
   flex: 0 0 415px;
-  border-right: 1px solid ${props => props.theme.secondaryColor};
+  border-right: 1px solid ${props => props.theme.colorStyled.ColorWhite};
 `;
 
 export const ItemDetailListItem = styled.div`
   display: flex;
   align-items: center;
-  border-top: 1px solid ${props => props.theme.secondaryColor};
+  border-top: 1px solid ${props => props.theme.colorStyled.ColorWhite};
   cursor: pointer;
   &:last-child {
-    border-bottom: 1px solid ${props => props.theme.secondaryColor};
+    border-bottom: 1px solid ${props => props.theme.colorStyled.ColorWhite};
   }
   &:hover {
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${props => props.theme.colorStyled.ColorWhite};
   }
   ${({ active }) => active
     && css`
-      background-color: ${props => props.theme.secondaryColor};
+      background-color: ${props => props.theme.colorStyled.ColorWhite};
     `};
 `;
 
@@ -55,9 +55,9 @@ export const ItemDetailInfoHeaderWrapper = styled.div`
   padding: 15px 20px;
   height: 60px;
   .receive-form {
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${props => props.theme.colorStyled.ColorWhite};
     border-radius: 7px;
-    border: 1px solid ${props => props.theme.secondaryColor};
+    border: 1px solid ${props => props.theme.colorStyled.ColorWhite};
     box-shadow: 0 3px 9px #00000080;
     position: fixed;
     top: 50px;
@@ -78,12 +78,12 @@ export const ItemDetailInfoActionGroup = styled.div`
   align-items: center;
   .icon-pencil {
     border-radius: 3px;
-    border: 1px solid ${props => props.theme.secondaryColor};
+    border: 1px solid ${props => props.theme.colorStyled.ColorWhite};
     padding: 5px 10px;
     font-size: 18px;
     color: #222;
     &:hover {
-      border-color: ${props => props.theme.secondaryColor};
+      border-color: ${props => props.theme.colorStyled.ColorWhite};
       box-shadow: 0 1px 1px #0000001a;
     }
   }
@@ -116,7 +116,7 @@ export const MoreButton = styled.div`
   align-items: center;
   position: relative;
   height: 30px;
-  border: 1px solid ${props => props.theme.secondaryColor};
+  border: 1px solid ${props => props.theme.colorStyled.ColorWhite};
   border-radius: 3px;
   margin-left: 10px;
   cursor: pointer;
@@ -136,8 +136,8 @@ export const MoreOptionWrapper = styled.div`
   min-width: 160px;
   padding: 5px 0;
   margin: 2px 0 0;
-  background-color: ${props => props.theme.secondaryColor};
-  border: 1px solid ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
+  border: 1px solid ${props => props.theme.colorStyled.ColorWhite};
   border-radius: 2px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 `;
@@ -146,8 +146,8 @@ export const MoreOptionItem = styled.div`
   padding: 3px 20px;
   line-height: 1.4;
   &:hover {
-    color: ${props => props.theme.secondaryColor};
-    background-color: ${props => props.theme.submitColor};
+    color: ${props => props.theme.colorStyled.ColorWhite};
+    background-color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
   }
 `;
 
@@ -162,14 +162,14 @@ export const ItemTabListWrapper = styled.div`
     padding: 10px 15px;
     font-size: 11px;
     text-transform: uppercase;
-    color: ${props => props.theme.submitColor};
+    color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
     border: none;
     &:hover {
       color: #555;
     }
   }
   .react-tabs__tab-list {
-    border-color: ${props => props.theme.secondaryColor};
+    border-color: ${props => props.theme.colorStyled.ColorWhite};
     margin: 0px;
   }
   .react-tabs__tab-panel {
@@ -177,8 +177,8 @@ export const ItemTabListWrapper = styled.div`
   }
   .react-tabs__tab--selected {
     border-radius: 0px;
-    border-color: ${props => props.theme.secondaryColor};
-    border-bottom: 3px solid ${props => props.theme.submitColor};
+    border-color: ${props => props.theme.colorStyled.ColorWhite};
+    border-bottom: 3px solid ${props => props.theme.colorStyled.ColoraBtnPrimary};
     color: #555;
   }
   ${({ isLarge }) => isLarge
@@ -233,11 +233,11 @@ export const OverviewProduct = styled.div`
 
   a {
     text-decoration: unset;
-    color: ${props => props.theme.submitColor};
+    color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
   }
   ${({ link }) => link
     && css`
-      color: ${props => props.theme.submitColor};
+      color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
       &:hover {
         color: #154983;
       }
@@ -248,7 +248,7 @@ export const OverviewImageWrapper = styled.div`
   position: relative;
   min-height: 160px;
   width: 237px;
-  border: 1px solid ${props => props.theme.secondaryColor};
+  border: 1px solid ${props => props.theme.colorStyled.ColorWhite};
   border-radius: 4px;
 `;
 
@@ -276,7 +276,7 @@ export const OverviewImageAction = styled.div`
   text-align: right;
   i {
     &:hover {
-      color: ${props => props.theme.submitColor};
+      color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
     }
   }
 `;
@@ -291,7 +291,7 @@ export const OverviewImageListWrapper = styled.div`
 
 export const OverviewImage = styled.div`
   display: inline-block;
-  border: 1px solid ${props => props.theme.secondaryColor};
+  border: 1px solid ${props => props.theme.colorStyled.ColorWhite};
   min-height: 43px;
   min-width: 42px;
   padding: 5px;
@@ -317,16 +317,16 @@ export const OverviewImage = styled.div`
     height: auto;
   }
   &:hover {
-    border: 1px solid ${props => props.theme.submitColor};
+    border: 1px solid ${props => props.theme.colorStyled.ColoraBtnPrimary};
   }
   ${({ active }) => active
     && css`
-      border: 1px solid ${props => props.theme.submitColor};
+      border: 1px solid ${props => props.theme.colorStyled.ColoraBtnPrimary};
     `};
 `;
 
 export const OverviewAddImage = styled.div`
-  border: 1px dashed ${props => props.theme.secondaryColor};
+  border: 1px dashed ${props => props.theme.colorStyled.ColorWhite};
   min-height: 43px;
   min-width: 42px;
   padding: 5px;

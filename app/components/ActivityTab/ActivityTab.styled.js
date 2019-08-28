@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const DashboardInfoUser = styled.div`
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
   font-size: 14px;
 `;
 
 export const DashboardLink = styled.a`
   font-weight: 600;
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
   margin:0 3px;
 `;
 
@@ -27,7 +27,7 @@ export const DashboardSubTitle = styled.h3`
 `;
 
 export const DashboardLinkTitle = styled(Link)`
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
   font-weight: 600;
   &:hover {
     color: #ff5402;
@@ -37,13 +37,13 @@ export const DashboardLinkTitle = styled(Link)`
 export const DashboardContent = styled.div`
   display: flex;
   padding: 16px;
-  background-color: ${props => props.theme.secondaryColor}
+  background-color: ${props => props.theme.colorStyled.ColorWhite}
   border: 1px solid #d1d5da;
   border-radius: 3px;
 `;
 
 export const DashboardTitle = styled.div`
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
 `;
 
 export const DashboardLeftBlock = styled.div`
@@ -55,7 +55,7 @@ export const DashboardRightBlock = styled.div`
 `;
 
 export const DashboardSubDesc = styled.span`
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
   margin-bottom: 15px;
 `;
 

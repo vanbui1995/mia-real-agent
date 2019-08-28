@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import {
-  Row, Col, Form, Avatar,
+  Row, Col, Form,
 } from 'antd';
 import FormInput from '../FormInput/FormInput';
 import {
   LoginWrapper,
-  LoginItem,
-  LoginLogo,
+  TemplateLoginPage,
+  LogoSite,
+} from './styles';
+import {
   LoginBtn,
   LoginFBBtn,
   LoginFooter,
@@ -17,7 +19,8 @@ import {
   LoginFooterLink,
   LoginSpinner,
   LoginErrorMessage,
-} from './styles';
+} from '../../stylesheets/Button.style';
+
 import { toI18n } from '../../utils/func-utils';
 
 const initialValues = {
@@ -77,7 +80,10 @@ class Login extends Component {
     const { errorMessage } = this.props;
     return (
       <LoginWrapper>
-        <LoginItem>
+        <TemplateLoginPage>
+          <LogoSite>
+            <img className="img" src="/assets/images/logo-small-black.png" alt="logo mia" />
+          </LogoSite>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -85,9 +91,6 @@ class Login extends Component {
           >
             {({ handleSubmit }) => (
               <Form onSubmit={handleSubmit}>
-                <LoginLogo>
-                  <img className="img" src="/assets/images/logo-small-black.png" alt="logo mia" />
-                </LoginLogo>
                 <Row gutter={32}>
                   <Col>
                     <FormInput
@@ -97,8 +100,6 @@ class Login extends Component {
                       login={1}
                     />
                   </Col>
-                </Row>
-                <Row gutter={32}>
                   <Col>
                     <FormInput
                       type="password"
@@ -114,14 +115,13 @@ class Login extends Component {
                     {errorMessage}
                   </LoginErrorMessage>
                 )}
-
+                <LoginFBBtn href="api/auth/login/facebook">
+                  <i className="mia-facebook" />
+                  {toI18n('LOGIN_LOGIN_WITH_FB')}
+                </LoginFBBtn>
               </Form>
             )}
           </Formik>
-          <LoginFBBtn href="api/auth/login/facebook">
-            <i className="mia-facebook" />
-            {toI18n('LOGIN_LOGIN_WITH_FB')}
-          </LoginFBBtn>
           <LoginFooter>
             <LoginFooterText>
               {toI18n('LOGIN_DONT_HAVE_AN_ACCOUNT')}
@@ -129,7 +129,8 @@ class Login extends Component {
             <LoginFooterLink href="/register">
               {toI18n('LOGIN_REGISTER_NOW')}
             </LoginFooterLink>
-            <div />
+          </LoginFooter>
+          <LoginFooter>
             <LoginFooterText>
               {toI18n('LOGIN_WANT_TO_BE_AN_AGENT')}
             </LoginFooterText>
@@ -137,7 +138,7 @@ class Login extends Component {
               {toI18n('LOGIN_CLICK_HERE')}
             </LoginFooterLink>
           </LoginFooter>
-        </LoginItem>
+        </TemplateLoginPage>
       </LoginWrapper>
     );
   }

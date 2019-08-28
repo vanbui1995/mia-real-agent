@@ -176,6 +176,7 @@ html, body, div, span, applet, object, iframe,
       display: none!important;
     }
   }
+  
 `;
 
 export default GlobalStyle;

@@ -13,8 +13,8 @@ export const PopupOverlayWrapper = styled.div`
 
 export const PopupModalWrapper = styled.div`
   position: absolute;
-  color: ${props => props.theme.textColor};
-  background-color: ${props => props.theme.secondaryColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   top: 50%;
   left: 50%;
   right: auto;
@@ -35,7 +35,7 @@ export const PopupHeader = styled.div`
   ${({ error }) => error && css`
     background-color: #b52d2d;
     border-bottom: 1px solid #b52d2d;
-    color: ${props => props.theme.secondaryColor}
+    color: ${props => props.theme.colorStyled.ColorWhite}
   `};
 `;
 

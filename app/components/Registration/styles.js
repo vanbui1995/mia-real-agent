@@ -1,17 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 import { Input } from 'antd';
-import { LoginLogo } from '../Login/styles';
+import { LogoSite, LoginWrapper } from '../Login/styles';
 
-export const RegistrationWrapper = styled.div`
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url('../../assets/images/bg-login.jpg');
-  background-position: left center;
-  background-size: cover;
-  background-repeat: no-repeat;
+export const RegistrationWrapper = styled(LoginWrapper)`
 `;
 
 export const RegistrationItem = styled.div`
@@ -20,15 +11,15 @@ export const RegistrationItem = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
-  box-shadow: 0px 0px 17px -3px #2a3a516e;
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
+  box-shadow: ${props => props.theme.boxShandow.loginPage};
   padding: 50px;
   color: #6e6c83fa;
   position: relative;
   z-index: 1;
 `;
 
-export const RegistrationTitle = styled(LoginLogo)`
+export const RegistrationTitle = styled(LogoSite)`
   
 `;
 
@@ -56,25 +47,25 @@ export const RegistrationInput = styled(Input)`
 
 export const RegistrationLabel = styled.div`
   margin-bottom: 7.5px;
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.colorStyled.ColorBlack};
 `;
 
 export const RegistrationBtn = styled.button`
   height: 50px;
   width: 100%;
   border-radius: 50px;
-  border: 1px solid ${props => props.theme.textColor};
+  border: 1px solid ${props => props.theme.colorStyled.ColorBlack};
   transition: .3s ease;
-  background: ${props => props.theme.textColor};
-  color: ${props => props.theme.secondaryColor};
+  background: ${props => props.theme.colorStyled.ColorBlack};
+  color: ${props => props.theme.colorStyled.ColorWhite};
   cursor: pointer;
   margin-bottom: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   &:hover {
-    background: ${props => props.theme.secondaryColor};
-    color: ${props => props.theme.textColor};
+    background: ${props => props.theme.colorStyled.ColorWhite};
+    color: ${props => props.theme.colorStyled.ColorBlack};
   }
 `;
 

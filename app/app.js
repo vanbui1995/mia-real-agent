@@ -19,8 +19,8 @@ import 'moment/locale/vi';
 import FontFaceObserver from 'fontfaceobserver';
 import history from './utils/history';
 import SpinnerLoading from './components/PageLoading';
-import GlobalStyle from './global-styles';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import GlobalStyle from './stylesheets/global-styles';
+
 import './i18n';
 // Import root app
 import App from './routers';
@@ -33,7 +33,7 @@ import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/e
 
 import configureStore from './store';
 import AgentAcceptRequestContainer from './containers/AgentAcceptRequest/AgentAcceptRequestContainer';
-import theme from './assets/theme';
+import { DefaultThemes } from './stylesheets/themes/DefaultThemes.style';
 import Translator from './containers/Translator/Translator';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
@@ -55,7 +55,7 @@ const render = () => {
     <>
       <GlobalStyle />
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={DefaultThemes}>
           <PersistGate loading={<SpinnerLoading />} persistor={persistor}>
             <ConnectedRouter history={history}>
               <Translator />
@@ -66,7 +66,7 @@ const render = () => {
         </ThemeProvider>
       </Provider>
     </>,
-    MOUNT_NODE,
+    MOUNT_NODE
   );
 };
 

@@ -6,8 +6,9 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { func } from 'prop-types';
 import FormInput from '../FormInput/FormInput';
-import { ApplicationBtn } from './styles';
 import { toI18n } from '../../utils/func-utils';
+import { ButtonCancel, ButtonSubmit } from '../../stylesheets/Button.style';
+import { ActionFormRegister } from './styles';
 
 const initialValues = {
   firstName: '',
@@ -36,30 +37,23 @@ export class BasicInfoForm extends Component {
   }
 
   renderRegisterBtn = () => (
-    <Row gutter={32}>
-      <Col sm={12} xs={24}>
-        <ApplicationBtn
-          type="button"
-          onClick={this.handleCancel}
-        >
-          <i className="mia-chevron-left" />
-          {toI18n('FORM_BACK')}
-        </ApplicationBtn>
-      </Col>
-      <Col sm={12} xs={24}>
-        <ApplicationBtn
-          type="submit"
-          submit
-        >
-          {toI18n('FORM_NEXT')}
-          <i className="mia-chevron-right" />
-        </ApplicationBtn>
-      </Col>
-    </Row>
+    <ActionFormRegister>
+      <ButtonCancel
+        onClick={this.handleCancel}
+      >
+        <i className="mia-chevron-left" />
+        <span>{toI18n('FORM_BACK')}</span>
+      </ButtonCancel>
+      <ButtonSubmit>
+        <span>{toI18n('FORM_NEXT')}</span>
+        <i className="mia-chevron-right" />
+      </ButtonSubmit>
+    </ActionFormRegister>
   )
 
   handleCancel = () => {
     const { onCancel } = this.props;
+    console.log('ad');
     onCancel();
   }
 

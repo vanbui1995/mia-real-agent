@@ -8,12 +8,12 @@ import { func } from 'prop-types';
 import * as Yup from 'yup';
 import FormInput from '../FormInput/FormInput';
 import {
-  ApplicationBtnWrap,
-  ApplicationBtn, ArrayTagWrapper,
-  ArrayAddButton, ArrayInputWrapper, ArrayWrapper, TagAction,
+  ActionFormRegister,
+  ArrayTagWrapper,
+  ArrayInputWrapper, ArrayWrapper, TagAction,
 } from './styles';
+import { ButtonCancel, ButtonSubmit, ArrayAddButton } from '../../stylesheets/Button.style';
 import { POSITION_OPTIONS, CATEGORY_OPTIONS } from '../../../common/enums';
-import { DATE_TIME_FORMAT } from '../../utils/constants';
 import { toI18n } from '../../utils/func-utils';
 
 const experienceInititalValues = {
@@ -107,9 +107,13 @@ export class ExperienceForm extends Component {
     const { isExperienceFormOpen, editIndex } = this.state;
     return (
       <Modal
+        title="Add Experience"
+        wrapClassName="modal-customize"
+        centeredExperiences
         visible={isExperienceFormOpen}
         onClick={() => this.handleToggleExperienceModal(false)}
         footer={[]}
+        forceRender
       >
         <Formik
           ref={(formik) => { this.experienceformik = formik; }}
@@ -188,20 +192,18 @@ export class ExperienceForm extends Component {
                 </Col>
               </Row>
               <Row gutter={32}>
-                <ApplicationBtnWrap>
-                  <ApplicationBtn
-                    type="button"
-                    onClick={() => this.handleToggleExperienceModal(false)}
-                  >
-                    {toI18n('FORM_CANCEL')}
-                  </ApplicationBtn>
-                  <ApplicationBtn
-                    type="submit"
-                    submit
-                  >
-                    {editIndex >= 0 ? toI18n('FORM_SAVE') : toI18n('FORM_ADD')}
-                  </ApplicationBtn>
-                </ApplicationBtnWrap>
+                <Col sm={24} xs={24}>
+                  <ActionFormRegister>
+                    <ButtonCancel
+                      onClick={() => this.handleToggleExperienceModal(false)}
+                    >
+                      {toI18n('FORM_CANCEL')}
+                    </ButtonCancel>
+                    <ButtonSubmit>
+                      {editIndex >= 0 ? toI18n('FORM_SAVE') : toI18n('FORM_ADD')}
+                    </ButtonSubmit>
+                  </ActionFormRegister>
+                </Col>
               </Row>
             </Form>
           )}
@@ -275,26 +277,18 @@ export class ExperienceForm extends Component {
   }
 
   renderRegisterBtn = () => (
-    <Row gutter={32}>
-      <Col sm={12} xs={24}>
-        <ApplicationBtn
-          type="button"
-          onClick={this.handleCancel}
-        >
-          <i className="mia-chevron-left" />
-          {toI18n('FORM_BACK')}
-        </ApplicationBtn>
-      </Col>
-      <Col sm={12} xs={24}>
-        <ApplicationBtn
-          type="submit"
-          submit
-        >
-          {toI18n('FORM_NEXT')}
-          <i className="mia-chevron-right" />
-        </ApplicationBtn>
-      </Col>
-    </Row>
+    <ActionFormRegister>
+      <ButtonCancel
+        onClick={this.handleCancel}
+      >
+        <i className="mia-chevron-left" />
+        {toI18n('FORM_BACK')}
+      </ButtonCancel>
+      <ButtonSubmit>
+        {toI18n('FORM_NEXT')}
+        <i className="mia-chevron-right" />
+      </ButtonSubmit>
+    </ActionFormRegister>
   )
 
   handleSubmit = (values) => {

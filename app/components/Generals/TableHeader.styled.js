@@ -46,10 +46,10 @@ export const TableHeaderLeftWrapper = styled.div`
   }
   .select__control--is-focused {
     box-shadow: none;
-    border-color: ${props => props.theme.secondaryColor} !important;
+    border-color: ${props => props.theme.colorStyled.ColorWhite} !important;
   }
   .select__option--is-focused {
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${props => props.theme.colorStyled.ColorWhite};
   }
 `;
 
@@ -62,10 +62,10 @@ export const TableHeaderRightWrapper = styled.div`
 `;
 
 export const TableHeaderAddNewButton = styled.div`
-  background-color: ${props => props.theme.primaryColor};
-  border-color: ${props => props.theme.primaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorBgDefault};
+  border-color: ${props => props.theme.colorStyled.ColorBgDefault};
   border-radius: 3px;
-  color: ${props => props.theme.secondaryColor};
+  color: ${props => props.theme.colorStyled.ColorWhite};
   padding: 5px 12px;
   margin-right: 10px;
   display: flex;
@@ -85,7 +85,7 @@ export const TableHeaderSortButton = styled.div`
   position: relative;
   border-radius: 3px;
   border: 1px solid #bfbfbf;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   padding: 5px 10px;
   font-size: 18px;
   cursor: pointer;
@@ -102,7 +102,7 @@ export const TableHeaderSortWrapper = styled.div`
   min-width: 260px;
   padding: 5px 0;
   margin: 2px 0 0;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   border: 1px solid #00000026;
   border-radius: 2px;
   box-shadow: 0 6px 12px #0000002d;
@@ -121,7 +121,7 @@ export const TableHeaderSortWrapper = styled.div`
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-bottom: 8px solid;
-    border-bottom-color: ${props => props.theme.secondaryColor};
+    border-bottom-color: ${props => props.theme.colorStyled.ColorWhite};
     top: -8px;
     content: '';
     right: 10px;
@@ -152,13 +152,13 @@ export const TableHeaderSortContent = styled.div`
   }
 
   &:hover {
-    color: ${props => props.theme.secondaryColor};
-    background-color: ${props => props.theme.submitColor};
+    color: ${props => props.theme.colorStyled.ColorWhite};
+    background-color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
   }
   ${({ active }) => active
     && css`
-      color: ${props => props.theme.secondaryColor};
-      background-color: ${props => props.theme.submitColor};
+      color: ${props => props.theme.colorStyled.ColorWhite};
+      background-color: ${props => props.theme.colorStyled.ColoraBtnPrimary};
     `};
 `;
 

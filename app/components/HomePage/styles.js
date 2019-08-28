@@ -58,7 +58,7 @@ export const MiaMessengerLink = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${props => props.theme.secondaryColor};
+  color: ${props => props.theme.colorStyled.ColorWhite};
   margin-top: 25px;
   box-shadow: 0px 0px 20px 0px rgba(0, 131, 254, 0.57);
   transition: .3s ease;

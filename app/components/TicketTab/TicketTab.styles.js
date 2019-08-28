@@ -24,11 +24,11 @@ export const FilterItem = styled.div`
   > * {
     height: 100%;
   }
-  background-color: ${props => props.theme.textColorSecondary};
+  background-color: ${props => props.theme.colorStyled.ColorBlackSecondary};
   input {
     border: 1px solid #d9d9d9;
     border-left: none;
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${props => props.theme.colorStyled.ColorWhite};
     box-shadow: inset 0 1px 2px rgba(27,31,35,.075);
     border-radius: 0px 3px 3px 0px;
     padding: 0px 8px;
@@ -41,7 +41,7 @@ export const FilterItem = styled.div`
     position: absolute;
     left: 0px;
     top: 35px;
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${props => props.theme.colorStyled.ColorWhite};
     border-radius: 3px;
     border: 1px solid #d9d9d9;
     width: 220px;
@@ -61,13 +61,13 @@ export const FilterItem = styled.div`
       &:hover {
         background-color: #ff5402;
         border-bottom: 1px solid #ff5402;
-        color: ${props => props.theme.secondaryColor};
+        color: ${props => props.theme.colorStyled.ColorWhite};
       }
     }
     .ant-menu-item.ant-menu-item-selected {
       background-color: #ff5402;
       border-bottom: 1px solid #ff5402;
-      color: ${props => props.theme.secondaryColor};
+      color: ${props => props.theme.colorStyled.ColorWhite};
     }
   }
 `;
@@ -78,7 +78,7 @@ export const Filter = styled.div`
   align-items: center;
   a {
     border: 1px solid #d9d9d9;
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${props => props.theme.colorStyled.ColorWhite};
     background-image: linear-gradient(-180deg,#fff,#eff3f6 90%);
     background-position: -1px -1px;
     background-repeat: repeat-x;
@@ -95,7 +95,7 @@ export const Filter = styled.div`
       border-radius: 3px 0px 0px 3px;
     }
     &:hover {
-      color: ${props => props.theme.textColor};
+      color: ${props => props.theme.colorStyled.ColorBlack};
       border-color: #1b1f2359;
     }
   }
@@ -118,7 +118,7 @@ export const TicketPaginationWrapper = styled.div`
   padding: 0 16px;
   text-align: center;
   .ant-pagination-item.ant-pagination-item-active a {
-    color: ${props => props.theme.textColor};
+    color: ${props => props.theme.colorStyled.ColorBlack};
   }
   .ant-pagination-item-active {
     border-color: #d9d9d9;

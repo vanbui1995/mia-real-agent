@@ -12,7 +12,7 @@ export const HeaderStyled = styled.div`
   width: 100%;
   height: 60px;
   z-index: 1;
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   border-bottom: 1px solid #d9d9d9;
   display: flex;
 `;
@@ -58,7 +58,7 @@ export const ActionsStyled = styled.div`
 export const SettingIcon = styled.i``;
 
 export const TopNavBarSerachWrapper = styled.div`
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.theme.colorStyled.ColorWhite};
   border: 1px solid #ccc;
   border-radius: 20px;
   width: 320px;

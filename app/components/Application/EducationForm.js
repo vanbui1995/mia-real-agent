@@ -9,11 +9,13 @@ import { func } from 'prop-types';
 import FormInput from '../FormInput/FormInput';
 import {
   ApplicationBtnWrap,
-  ApplicationBtn, ArrayTagWrapper,
-  ArrayInputWrapper, ArrayAddButton, TagAction, DescriptionWrapper, DescriptionNumber, ArrayWrapper,
+  ArrayTagWrapper,
+  ActionFormRegister,
+  ArrayInputWrapper, TagAction, DescriptionNumber, ArrayWrapper,
 } from './styles';
 import { POSITION_OPTIONS, FIELD_OF_STUDY } from '../../../common/enums';
 import { toI18n } from '../../utils/func-utils';
+import { ButtonCancel, ButtonSubmit, ArrayAddButton } from '../../stylesheets/Button.style';
 
 const educationInititalValues = {
   school: '',
@@ -88,6 +90,9 @@ export class EducationForm extends Component {
         visible={isEducationFormOpen}
         onClick={() => this.handleToggleEducationModal(false)}
         footer={[]}
+        title="Add Education"
+        wrapClassName="modal-customize"
+        centeredExperiences
       >
         <Formik
           ref={(formik) => { this.educationformik = formik; }}
@@ -150,20 +155,18 @@ export class EducationForm extends Component {
                 </Col>
               </Row>
               <Row gutter={32}>
-                <ApplicationBtnWrap>
-                  <ApplicationBtn
-                    type="button"
-                    onClick={() => this.handleToggleEducationModal(false)}
-                  >
-                    {toI18n('FORM_CANCEL')}
-                  </ApplicationBtn>
-                  <ApplicationBtn
-                    type="submit"
-                    submit
-                  >
-                    {editIndex >= 0 ? toI18n('FORM_SAVE') : toI18n('FORM_ADD')}
-                  </ApplicationBtn>
-                </ApplicationBtnWrap>
+                <Col sm={24} xs={24}>
+                  <ActionFormRegister>
+                    <ButtonCancel
+                      onClick={() => this.handleToggleEducationModal(false)}
+                    >
+                      {toI18n('FORM_CANCEL')}
+                    </ButtonCancel>
+                    <ButtonSubmit>
+                      {editIndex >= 0 ? toI18n('FORM_SAVE') : toI18n('FORM_ADD')}
+                    </ButtonSubmit>
+                  </ActionFormRegister>
+                </Col>
               </Row>
             </Form>
           )}
@@ -222,26 +225,18 @@ export class EducationForm extends Component {
   }
 
   renderRegisterBtn = () => (
-    <Row gutter={32}>
-      <Col sm={12} xs={24}>
-        <ApplicationBtn
-          type="button"
-          onClick={this.handleCancel}
-        >
-          <i className="mia-chevron-left" />
-          {toI18n('FORM_BACK')}
-        </ApplicationBtn>
-      </Col>
-      <Col sm={12} xs={24}>
-        <ApplicationBtn
-          type="submit"
-          submit
-        >
-          {toI18n('FORM_NEXT')}
-          <i className="mia-chevron-right" />
-        </ApplicationBtn>
-      </Col>
-    </Row>
+    <ActionFormRegister>
+      <ButtonCancel
+        onClick={this.handleCancel}
+      >
+        <i className="mia-chevron-left" />
+        {toI18n('FORM_BACK')}
+      </ButtonCancel>
+      <ButtonSubmit>
+        {toI18n('FORM_NEXT')}
+        <i className="mia-chevron-right" />
+      </ButtonSubmit>
+    </ActionFormRegister>
   )
 
   handleSubmit = (values) => {
