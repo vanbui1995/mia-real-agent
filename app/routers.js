@@ -27,6 +27,7 @@ import TicketDetail from './containers/TicketDetail';
 import ApplicationManagement from './pages/ApplicationManagement';
 import ApplicationDetail from './containers/ApplicationDetail';
 import IntentManagement from './pages/IntentManagement';
+import CannedResponseManagement from './pages/CannedResponseManagement';
 
 import AdminDashboard from './pages/AdminDashboard';
 import ApplicationForm from './pages/Application';
@@ -60,6 +61,7 @@ class Router extends React.PureComponent {
               <AdminRoute path="/admin/intents/:id?" component={IntentManagement} />
               <AdminRoute exact path="/admin/user" component={UserManagement} />
               <AdminRoute path="/admin/user/:id" component={UserDetail} />
+              <AdminRoute path="/admin/canned-responses" component={CannedResponseManagement} />
               <AdminRoute exact path="/admin" component={() => <Redirect to="/admin/user" />} />
             </AdminMainLayout>
           )}

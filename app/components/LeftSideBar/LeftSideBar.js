@@ -50,6 +50,13 @@ const TABS_MENU = [
     icon: 'mia-filter',
     link: '/admin/intents',
   },
+  {
+    key: 'canned-responses',
+    type: 'container',
+    label: toI18n('ADMIN_LEFT_NAV_CANNED_RESPONDE'),
+    icon: 'mia-menu',
+    link: '/admin/canned-responses',
+  },
 ];
 
 const paths = _reduce(
@@ -83,6 +90,7 @@ class LeftSideBar extends PureComponent {
   componentDidUpdate(prevProps) {
     const { pathname: prevPathname } = prevProps;
     const { pathname } = this.props;
+
 
     // set active tab item
     if (prevPathname !== pathname) {

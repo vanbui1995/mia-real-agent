@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { EditorState } from 'draft-js';
 import {
   Form, Icon,
 } from 'antd';
@@ -28,7 +29,7 @@ import {
 } from './styles';
 import LoadingSpin from '../Loading';
 import ConversationDetail from '../ConversationDetail/ConversationDetail';
-import { TICKET_STATUS, REPLY_TYPE, CLOSED_TICKET_STATUSES } from '../../../common/enums';
+import { REPLY_TYPE, CLOSED_TICKET_STATUSES } from '../../../common/enums';
 import FormInput from '../FormInput/FormInput';
 import { combineChat } from './utils';
 import { shouldShowSystemMessage, isAgent, toI18n } from '../../utils/func-utils';
@@ -37,6 +38,7 @@ import {
   userChat, otherChat, otherTyping, botChat, ticketStatus, userAction,
 } from './ChatItem';
 import RichEditor from '../FormInput/RichEditor/RichEditor';
+import mentions from '../FormInput/RichEditor/mentions';
 
 const scrollStyle = {
   height: 'calc(100% - 60px)',
@@ -44,13 +46,14 @@ const scrollStyle = {
 };
 
 const initialValues = {
-  content: '',
+  content: EditorState.createEmpty(),
 };
 
 export default class MessageBox extends Component {
   messagesEndRef = React.createRef();
 
   static propTypes = {
+    cannedResponses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     userId: PropTypes.string.isRequired,
     conversationId: PropTypes.string,
     systemMessage: PropTypes.object,
@@ -63,7 +66,7 @@ export default class MessageBox extends Component {
     sendingMessages: PropTypes.arrayOf(PropTypes.shape()),
     sendingMessageErrors: PropTypes.objectOf(PropTypes.any),
     otherUserTyping: PropTypes.object,
-
+    fetchCannedResponseForUser: PropTypes.func.isRequired,
     t: PropTypes.func,
     findAgentRequest: PropTypes.func.isRequired,
     sendReplyMessage: PropTypes.func.isRequired,
@@ -85,6 +88,15 @@ export default class MessageBox extends Component {
     conversationId: '',
     sendingMessages: [],
     // sendingMessageErrors: {},
+  }
+
+  state = {
+    content: EditorState.createEmpty(),
+  }
+
+  componentDidMount() {
+    const { fetchCannedResponseForUser } = this.props;
+    fetchCannedResponseForUser({});
   }
 
   componentDidUpdate = (prevProps) => {
@@ -198,18 +210,21 @@ export default class MessageBox extends Component {
     </MessageActionWrapper>
   );
 
-  handleChatSubmit = (values) => {
+  handleChatSubmit = () => {
     const {
       sendReplyMessage, conversationId, userTyping, userRole,
     } = this.props;
-    const { content } = values;
-    const trimmedContent = content.trim();
+    const { content } = this.state;
+    const trimmedContent = content.getCurrentContent().getPlainText().trim();
     if (trimmedContent) {
       sendReplyMessage(conversationId, trimmedContent);
       if (!isAgent(userRole)) {
         userTyping(conversationId, '');
       }
       this.formik.getFormikContext().resetForm();
+      this.setState({
+        content: EditorState.createEmpty(),
+      });
     }
   }
 
@@ -227,8 +242,15 @@ export default class MessageBox extends Component {
     }
   }
 
+  handleChangeContent = (content) => {
+    this.setState({
+      content,
+    });
+  }
+
   renderMessageInput = () => {
-    const { t } = this.props;
+    const { cannedResponses } = this.props;
+    const { content } = this.state;
     return (
       <Formik
         ref={(formik) => { this.formik = formik; }}
@@ -240,7 +262,14 @@ export default class MessageBox extends Component {
             onSubmit={handleSubmit}
           >
             <MessageInputWrapper>
-              <RichEditor mentions={[]} />
+              <RichEditor
+                mentions={cannedResponses.map(({ shortcut: title, content: name }) => ({
+                  title,
+                  name,
+                }))}
+                onChange={this.handleChangeContent}
+                editorState={content}
+              />
               {this.renderGroupAction()}
               <InputAction onClick={handleSubmit} className="mia-enter" />
             </MessageInputWrapper>
@@ -308,7 +337,6 @@ export default class MessageBox extends Component {
       </RatingWrapper>
     );
   }
-
 
   render() {
     const {

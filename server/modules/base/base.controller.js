@@ -58,6 +58,7 @@ export default class BaseController {
     try {
       const { model } = req;
       const newModel = req.body;
+      console.log({ newModel });
       _.assign(model, newModel);
 
       const savedModel = await model.save();

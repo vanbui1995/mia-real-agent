@@ -13,6 +13,7 @@ import conversationSaga from './conversations';
 import repliesSaga from './replies';
 import responseSaga from './response';
 import agentsSaga from './agents';
+import cannedResponseSaga from './cannedResponse';
 
 export default function* rootSagas() {
   configAxios();
@@ -36,5 +37,6 @@ export default function* rootSagas() {
     agentsSaga(),
     intentSaga(),
     responseSaga(),
+    cannedResponseSaga(),
   ]);
 }

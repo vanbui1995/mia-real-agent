@@ -36,6 +36,10 @@ export const COLUMN_TYPE = {
 };
 
 export const SORT = {
+  CANNED_RESPONSE_SORT: [{
+    title: 'Created Time',
+    value: 'createdAt',
+  }],
   TICKET_SORT: [
     {
       title: 'Created Time',

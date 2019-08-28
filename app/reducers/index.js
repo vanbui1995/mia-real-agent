@@ -18,6 +18,7 @@ import replies from './replies';
 import requests from './requests';
 import response from './response';
 import intent from './intent';
+import cannedResponse from './cannedResponse';
 
 export const REHYDRATE_COMPLETE = 'root/REHYDRATE_COMPLETE';
 export const CLEAR_TRANSACTION = 'root/CLEAR_TRANSACTION';
@@ -40,6 +41,7 @@ export default function createReducer(injectedReducers = {}) {
     replies,
     requests,
     response,
+    cannedResponse,
     router: connectRouter(history),
     ...injectedReducers,
   });

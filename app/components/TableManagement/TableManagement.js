@@ -17,9 +17,15 @@ class TableManagement extends React.PureComponent {
   }
 
   goToDetail = (item) => {
-    const { endpoint, shouldOpenDetail = true, onClick } = this.props;
+    const {
+      endpoint, shouldOpenDetail = true, onClick, onClickRow,
+    } = this.props;
     if (onClick) {
       onClick(item);
+      return;
+    }
+    if (onClickRow) {
+      onClickRow(item);
       return;
     }
     if (shouldOpenDetail) {
@@ -86,6 +92,7 @@ TableManagement.propTypes = {
   sizePerPage: PropTypes.number.isRequired,
   shouldOpenDetail: PropTypes.bool,
   onClick: PropTypes.func,
+  onClickRow: PropTypes.func,
   actions: shape(),
 };
 

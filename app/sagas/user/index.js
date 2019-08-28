@@ -140,7 +140,6 @@ function* userUpdate({ payload }) {
 }
 
 function* userRemove({ userId }) {
-  yield configAxios();
   const { response, error } = yield call(UserAPI.remove, userId);
   const data = _get(response, 'data', {});
   if (error) {

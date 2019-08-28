@@ -170,6 +170,7 @@ const en = {
     ADMIN_LEFT_NAV_APPLICATIONS: 'Applications',
     ADMIN_LEFT_NAV_USERS: 'Users',
     ADMIN_LEFT_NAV_INTENTS: 'Intents',
+    ADMIN_LEFT_NAV_CANNED_RESPONDE: 'Canned Responses',
     // Admin users table
     ADMIN_USERS_TABLE_ALL_USERS: 'All Users',
     ADMIN_USERS_TABLE_USERNAME: 'Username',
@@ -303,6 +304,20 @@ const en = {
     CLOSE_TICKET_MODAL_CLOSED_STATUS: 'Closed Status',
     CLOSE_TICKET_MODAL_UNSOLVED_REASON: 'Unsolved Reason',
     CLOSE_TICKET_MODAL_CLOSE_TICKET: 'Close Ticket',
+
+    // Canned Response Admin
+    CANNED_RESPONSE_ADMIN_ALL: 'All Canned Responses',
+    CANNED_RESPONSE_ADMIN_SHORTCUT: 'Shortcut',
+    CANNED_RESPONSE_ADMIN_CONTENT: 'Content',
+
+    // Canned Response Form
+
+    CANNED_RESPONSE_FORM_UPDATE_TITLE: 'Update Canned Response',
+    CANNED_RESPONSE_FORM_CREATE_TITLE: 'Create Canned Response',
+    CANNED_RESPONSE_FORM_SHORTCUT: 'Shortcut',
+    CANNED_RESPONSE_FORM_CONTENT: 'Content',
+    CANNED_RESPONSE_FORM_UPDATE_BTN: 'Update',
+    CANNED_RESPONSE_FORM_CREATE_BTN: 'Create',
   },
 };
 

@@ -10,6 +10,8 @@ import AdminRouter from './admin/routers';
 import ReplyRouter from './reply/reply.route';
 import IntentRouter from './intent/intent.route';
 import ResponseRouter from './intentResponse/intentResponse.route';
+import CannedResponseRouter from './canned-response/canned-response.route';
+
 
 const router = express.Router();
 
@@ -24,5 +26,6 @@ export default () => {
   router.use('/reply', ReplyRouter.router);
   router.use('/intents', IntentRouter.router);
   router.use('/responses', ResponseRouter.router);
+  router.use('/canned-responses', CannedResponseRouter.router);
   return router;
 };

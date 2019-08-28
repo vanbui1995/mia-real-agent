@@ -16,6 +16,8 @@ import {
   TableHeaderLeftTitle,
 } from '../Generals/TableHeader.styled';
 import { PopupOverlayStyled } from '../Generals/General.styled';
+import { NEW_BUTTONS_TYPE } from '../../../common/enums';
+
 
 class HeaderContainer extends PureComponent {
   state = {
@@ -85,17 +87,25 @@ class HeaderContainer extends PureComponent {
       url = '',
       shouldRenderNewButton = true,
       shouldRenderSendEmailButton = false,
+      newButtonType,
+      onClickAddButton = () => {},
     } = this.props;
     return (
       <TableHeaderRightWrapper>
         <ReactTooltip effect="solid" />
-        {shouldRenderNewButton && (
+        {shouldRenderNewButton && newButtonType === NEW_BUTTONS_TYPE.LINK && (
           <Link to={url}>
             <TableHeaderAddNewButton data-tip="Create Ticket">
               <i className="icon-add" />
               New
             </TableHeaderAddNewButton>
           </Link>
+        )}
+        {shouldRenderNewButton && newButtonType === NEW_BUTTONS_TYPE.BUTTON && (
+          <TableHeaderAddNewButton onClick={onClickAddButton}>
+            <i className="icon-add" />
+              New
+          </TableHeaderAddNewButton>
         )}
         {shouldRenderSendEmailButton && (
           <TableHeaderAddNewButton
@@ -150,6 +160,13 @@ HeaderContainer.propTypes = {
   filterItems: PropTypes.array,
   filtering: PropTypes.object,
   shouldRenderFilter: PropTypes.bool,
+  newButtonType: PropTypes.string,
+  onClickAddButton: PropTypes.func,
+};
+
+HeaderContainer.defaultProps = {
+  newButtonType: NEW_BUTTONS_TYPE.LINK,
+  newButtonType: () => {},
 };
 
 export default HeaderContainer;

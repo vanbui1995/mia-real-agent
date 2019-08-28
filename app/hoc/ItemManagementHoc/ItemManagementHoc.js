@@ -22,6 +22,9 @@ const ItemManagementHoc = (ItemsManagementTable) => {
         currentFiltering,
         shouldRenderFilter,
         errorMsg,
+        newButtonType,
+        onClickAddButton,
+        ...propsTables
       } = this.props;
 
       if (errorMsg) {
@@ -41,6 +44,8 @@ const ItemManagementHoc = (ItemsManagementTable) => {
             sorting={currentSorting}
             title={title}
             shouldRenderNewButton={shouldRenderNewButton}
+            onClickAddButton={onClickAddButton}
+            newButtonType={newButtonType}
             shouldRenderSendEmailButton={shouldRenderSendEmailButton}
             openModal={openModal}
             filterItems={filterItems}
@@ -48,7 +53,7 @@ const ItemManagementHoc = (ItemsManagementTable) => {
             filtering={currentFiltering}
             shouldRenderFilter={shouldRenderFilter}
           />
-          <ItemsManagementTable />
+          <ItemsManagementTable {...propsTables} />
         </DashboardWrapperStyled>
       );
     }
@@ -68,9 +73,11 @@ const ItemManagementHoc = (ItemsManagementTable) => {
     openModal: PropTypes.func,
     filterItems: PropTypes.array,
     handleFilter: PropTypes.func,
+    onClickAddButton: PropTypes.func,
     currentFiltering: PropTypes.object,
     shouldRenderFilter: PropTypes.bool,
     errorMsg: PropTypes.string,
+    newButtonType: PropTypes.string,
   };
 
   return ItemManagementWrapper;

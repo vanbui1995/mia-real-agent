@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { getUserId, getUserRole } from 'reducers/auth';
 import { withTranslation } from 'react-i18next';
+import { actions as cannedResponseActions } from 'reducers/cannedResponse';
 import {
   isFetchingReplies,
   getErrorMessage,
@@ -28,6 +29,7 @@ import {
   findAgentRequest,
 } from '../../reducers/requests';
 import MessageBox from '../../components/MessageBox';
+import { getCannedResponsesForUser } from '../../selectors/cannedResponse';
 
 const mapStateToProps = (state) => {
   const conversationId = getCurrentConveration(state);
@@ -44,6 +46,7 @@ const mapStateToProps = (state) => {
     sendingMessageErrors: getSendingMessagesError(state, conversationId),
     isFindingAgent: isFindingAgent(state, conversationId),
     userRole: getUserRole(state),
+    cannedResponses: getCannedResponsesForUser(state),
     systemMessage: getSystemMessage(state),
     otherUserTyping: getOtherUserTyping(state),
     solutionFound,
@@ -58,6 +61,7 @@ const mapDispatchToProps = {
   joinConversation: CONVERSATION_ACTIONS.userJoinConversation,
   leftConversation: CONVERSATION_ACTIONS.userLeftConversation,
   userTyping: CONVERSATION_ACTIONS.userTyping,
+  fetchCannedResponseForUser: cannedResponseActions.fetchCannedResponseForUser,
 };
 
 export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(MessageBox));

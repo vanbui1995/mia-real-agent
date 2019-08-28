@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { shape } from 'prop-types';
-import { EditorState } from 'draft-js';
+import { withTranslation } from 'react-i18next';
+
+import { shape, func, arrayOf } from 'prop-types';
 import Editor from 'draft-js-plugins-editor';
 import createMentionPlugin from 'draft-js-mention-plugin';
 
-import mentions from './mentions';
 
 import './editorStyles.css';
 import 'draft-js-mention-plugin/lib/plugin.css';
@@ -14,6 +14,10 @@ const Entry = (props) => {
     mention,
     ...parentProps
   } = props;
+
+
+  delete parentProps.searchValue;
+  delete parentProps.isFocused;
 
   return (
     <div {...parentProps}>
@@ -36,7 +40,14 @@ Entry.propTypes = {
 };
 
 
-export default class RichEditor extends Component {
+class RichEditor extends Component {
+  static propTypes = {
+    onChange: func.isRequired,
+    editorState: shape().isRequired,
+    mentions: arrayOf(shape({})).isRequired,
+    t: func.isRequired,
+  }
+
   constructor(props) {
     super(props);
 
@@ -53,19 +64,16 @@ export default class RichEditor extends Component {
   }
 
   state = {
-    editorState: EditorState.createEmpty(),
-    suggestions: mentions,
+    suggestions: [],
   };
 
   onChange = (editorState) => {
-    const text = editorState.getCurrentContent().getPlainText();
-    console.log({ text });
-    this.setState({
-      editorState,
-    });
+    const { onChange } = this.props;
+    onChange(editorState);
   };
 
   onSearchChange = ({ value }) => {
+    const { mentions } = this.props;
     let suggestions = [...mentions];
     if (value) {
       const regex = new RegExp(value, 'i');
@@ -85,20 +93,20 @@ export default class RichEditor extends Component {
   };
 
   render() {
+    const { editorState, t } = this.props;
     const { MentionSuggestions } = this.mentionPlugin;
     const plugins = [this.mentionPlugin];
 
     return (
       <div style={{ width: '100%' }} role="presentation" className="editor" onClick={this.focus}>
         <Editor
-          placeholder="Your message ..."
-          editorState={this.state.editorState}
+          placeholder={t('CONV_MESSAGE_BOX_TYPE_MESSAGE')}
+          editorState={editorState}
           onChange={this.onChange}
           plugins={plugins}
           ref={(element) => { this.editor = element; }}
         />
         <MentionSuggestions
-          handleReturn
           onSearchChange={this.onSearchChange}
           suggestions={this.state.suggestions}
           onAddMention={this.onAddMention}
@@ -108,3 +116,5 @@ export default class RichEditor extends Component {
     );
   }
 }
+
+export default withTranslation()(RichEditor);
