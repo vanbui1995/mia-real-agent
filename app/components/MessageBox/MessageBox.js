@@ -236,11 +236,11 @@ export default class MessageBox extends Component {
     findAgentRequest(conversationId);
   }
 
-  handleTyping = (e) => {
+  handleTyping = (content) => {
     const { userTyping, conversationId, userRole } = this.props;
     if (!isAgent(userRole)) {
-      const { value } = e.target;
-      userTyping(conversationId, value);
+      const textValue = content.getCurrentContent().getPlainText();
+      userTyping(conversationId, textValue);
     }
   }
 
@@ -248,6 +248,7 @@ export default class MessageBox extends Component {
     this.setState({
       content,
     });
+    this.handleTyping(content);
   }
 
   renderMessageInput = () => {
