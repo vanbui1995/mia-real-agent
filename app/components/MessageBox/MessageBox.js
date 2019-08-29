@@ -38,7 +38,6 @@ import {
   userChat, otherChat, otherTyping, botChat, ticketStatus, userAction, ticketRating,
 } from './ChatItem';
 import RichEditor from '../FormInput/RichEditor/RichEditor';
-import mentions from '../FormInput/RichEditor/mentions';
 
 const scrollStyle = {
   flex: 'auto',
